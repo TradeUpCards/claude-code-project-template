@@ -276,4 +276,8 @@ foreach ($lead in $LeadNames) {
 
 Write-Host "lead-launchers.ps1 loaded for $($env:PROJECT_NAME) (root: $($env:PROJECT_ROOT))"
 Write-Host "  Functions: Start-Lead, Finish-Lead, Get-Leads"
-Write-Host "  Aliases:   $($LeadNames | ForEach-Object { "Start-$((Get-Culture).TextInfo.ToTitleCase($_)), Finish-$((Get-Culture).TextInfo.ToTitleCase($_))" } | Sort-Object | -Join ', ')"
+$aliasList = ($LeadNames | ForEach-Object {
+    $cap = (Get-Culture).TextInfo.ToTitleCase($_)
+    "Start-$cap, Finish-$cap"
+}) -join ', '
+Write-Host "  Aliases:   $aliasList"
