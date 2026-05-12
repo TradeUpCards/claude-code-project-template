@@ -18,10 +18,12 @@ cd YOUR_PROJECT
 cursor .
 
 # 4. Open a terminal, start Claude Code, then run:
-/init-project
+/use-template
 ```
 
-`/init-project` walks you through the setup interactively (project name, license, gitignore flavor, named-lead setup, hard deadlines, dual-use considerations) and fills in all the placeholders.
+`/use-template` walks you through the setup interactively (project name, license, gitignore flavor, named-lead setup, hard deadlines, dual-use considerations) and fills in all the placeholders.
+
+> **Why `/use-template` and not `/init-project`?** A user-level skill called `project-init` already exists in the Foosaner ecosystem (general-purpose project bootstrap — CLAUDE.md, ARCHITECTURE.md stub, etc.). And `agent-team-setup` exists for adding multi-agent coordination to ANY existing project. `/use-template` is the LAST-MILE skill specific to THIS template — fills placeholders, removes unused options, makes the first commit. It complements rather than competes with the user-level skills.
 
 After init, `/tate` boots your team lead with a morning report.
 
@@ -34,13 +36,36 @@ After init, `/tate` boots your team lead with a morning report.
 - **5 generic teammate types** — `implementation-lead`, `quality-lead`, `delivery-lead`, `observability-security-teammate`, `codebase-mapper` — usable on any project
 - **3 named lead templates** (`aria.md.template`, `bram.md.template`, `cleo.md.template`) — filled by `/init-project` if you opt into Option C
 
-### Skills (slash commands)
-- **`/init-project`** — interactive project setup
+### Skills (slash commands) — built-in to template
+- **`/use-template`** — interactive project setup (run this FIRST after cloning)
 - **`/session-handoff`** — refresh `CLAUDE_SESSION_HANDOFF.md` before `/clear`
-- **`/tate`, `/aria`, `/bram`, `/cleo`** — load named-lead identity (filled by `/init-project`)
+- **`/story`** — capture a moment from the build as an interview-ready story (design defense, STAR, or war story); enforces 5-property quality bar
+- **`/build-audit`** — PM-style audit of what was built vs claimed; 8 lenses (coverage, decisions, deferrals, differentiators, PRD critique, red-team, risks, communication)
+- **`/daily-sync`** — multi-lead status sync; each lead self-attests, main session synthesizes
+- **`/tate`, `/aria`, `/bram`, `/cleo`** — load named-lead identity (Option C only; filled by `/use-template`)
+
+### User-level skills automatically available (Foosaner ecosystem)
+
+These live at `~/.claude/skills/` and are available in EVERY project, including projects cloned from this template. You don't need to copy them.
+
+| Skill | What it does |
+|---|---|
+| `project-init` | General-purpose project bootstrap (CLAUDE.md, ARCHITECTURE.md stub, .vscode/tasks.json) |
+| `agent-team-setup` | Bootstrap multi-agent workflow into any existing project |
+| `presearch-interview` | Multi-turn pre-coding discovery checklist; produces ARCHITECTURE.md |
+| `engineering-interview` | Repo-aware mock interview prep + readiness grading |
+| `agent-review` | Audit AI agent architecture |
+| `ai-security-review` | Audit AI app security |
+| `system-architecture-review` | Audit overall architecture |
+| `llm-observability-review` | Audit LLM observability implementation |
+| `synthetic-data-plan` / `synthetic-data-review` | Plan + review synthetic-data approach |
+| `langfuse` | Langfuse helpers |
+| `frontend-skill` | Visually strong landing pages / UI |
+| `weekly-prd` | Generate weekly PRD + task checklist for multi-week sprints |
 
 ### Coordination scaffolding
-- **`.gauntlet/PROJECT/`** (renamed to `.gauntlet/<project-name>/` on init) — `in-flight.md` (workstream rules + file ownership map), `kickoff/` (per-lead boot prompts), `handoffs/` (per-lead handoff files), `sessions/` (per-session recaps), `coordination/` (cross-lead negotiation threads), `candidates/_candidates.md` (story-capture seed)
+- **`.gauntlet/PROJECT/`** (renamed to `.gauntlet/<project-name>/` on init) — `in-flight.md` (workstream rules + file ownership map), `kickoff/` (per-lead boot prompts), `handoffs/` (per-lead handoff files), `sessions/` (per-session recaps), `coordination/` (cross-lead negotiation threads), `candidates/_candidates.md` (story-capture seed for `.gauntlet/<slug>/`)
+- **`.gauntlet/stories/`** — interview-story repository (used by `/story` skill); ships with `_template-design-defense.md`, `_template-star.md`, empty `_candidates.md`, and `README.md` index
 
 ### Repo-root primers
 - **`CLAUDE_SESSION_HANDOFF.md`** — fresh-Tate-session primer; refreshed at every session exit

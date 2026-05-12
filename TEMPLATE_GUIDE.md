@@ -27,30 +27,38 @@ claude-code-project-template/
 │   │   ├── bram.md.template                  # OPTION C: named lead 2 persona
 │   │   └── cleo.md.template                  # OPTION C: named lead 3 persona
 │   └── skills/
-│       ├── init-project/SKILL.md             # The setup walkthrough. Run this FIRST after cloning.
+│       ├── use-template/SKILL.md             # The setup walkthrough. Run this FIRST after cloning.
 │       ├── session-handoff/SKILL.md          # Refresh CLAUDE_SESSION_HANDOFF.md before /clear
-│       ├── tate/SKILL.md.template            # /tate slash command (filled by /init-project)
+│       ├── story/SKILL.md                    # Capture moments as interview-ready stories
+│       ├── build-audit/SKILL.md              # PM-style audit of what was built vs claimed (8 lenses)
+│       ├── daily-sync/SKILL.md               # Multi-lead status sync (Option C; lead-attested)
+│       ├── tate/SKILL.md.template            # /tate slash command (filled by /use-template)
 │       ├── aria/SKILL.md.template            # OPTION C: /aria slash command
 │       ├── bram/SKILL.md.template            # OPTION C: /bram slash command
 │       └── cleo/SKILL.md.template            # OPTION C: /cleo slash command
 │
 ├── .gauntlet/
-│   └── PROJECT/                              # Renamed to .gauntlet/<project-slug>/ by /init-project
-│       ├── README.md                         # Directory layout doc
-│       ├── in-flight.md.template             # Workstream rules + file ownership map
-│       ├── kickoff/                          # Per-lead boot prompts (filled by /init-project)
-│       │   ├── tate.md.template
-│       │   ├── aria.md.template              # OPTION C only
-│       │   ├── bram.md.template              # OPTION C only
-│       │   └── cleo.md.template              # OPTION C only
-│       ├── handoffs/                         # Per-lead handoff files (written as work happens)
-│       │   └── .gitkeep
-│       ├── sessions/                         # Per-session recaps (written at /clear)
-│       │   └── .gitkeep
-│       ├── coordination/                     # Cross-lead negotiation threads (when needed)
-│       │   └── .gitkeep
-│       └── candidates/
-│           └── _candidates.md.template       # Story-capture seed
+│   ├── PROJECT/                              # Renamed to .gauntlet/<project-slug>/ by /use-template
+│   │   ├── README.md                         # Directory layout doc
+│   │   ├── in-flight.md.template             # Workstream rules + file ownership map
+│   │   ├── kickoff/                          # Per-lead boot prompts (filled by /use-template)
+│   │   │   ├── tate.md.template
+│   │   │   ├── aria.md.template              # OPTION C only
+│   │   │   ├── bram.md.template              # OPTION C only
+│   │   │   └── cleo.md.template              # OPTION C only
+│   │   ├── handoffs/                         # Per-lead handoff files (written as work happens)
+│   │   │   └── .gitkeep
+│   │   ├── sessions/                         # Per-session recaps (written at /clear)
+│   │   │   └── .gitkeep
+│   │   ├── coordination/                     # Cross-lead negotiation threads (when needed)
+│   │   │   └── .gitkeep
+│   │   └── candidates/
+│   │       └── _candidates.md.template       # Project-specific candidate moments seed
+│   └── stories/                              # Interview-story repository (used by /story skill)
+│       ├── _template-design-defense.md       # Template for "why X over Y?" stories
+│       ├── _template-star.md                 # Template for "tell me about a time..." stories
+│       ├── _candidates.md                    # Story candidates backlog (low-threshold append)
+│       └── README.md                         # Index + how to use during interviews
 │
 ├── LICENSE_OPTIONS/                          # Pick one at /init-project; chosen file becomes ./LICENSE
 │   ├── apache-2.0.txt

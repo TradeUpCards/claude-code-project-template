@@ -1,6 +1,6 @@
 ---
-name: init-project
-description: Interactive walkthrough to set up a new project from this template. Asks the user about project name, license, gitignore flavor, lead-setup option (A/B/C), deadlines, and target URL. Then fills placeholders, renames PROJECT/ to project slug, removes unused option files, makes the first commit, and optionally creates a GitHub/GitLab repo. Run this FIRST after cloning the template.
+name: use-template
+description: Interactive walkthrough to finish setting up a new project after cloning from claude-code-project-template. Asks the user about project name, license, gitignore flavor, lead-setup option (A/B/C), deadlines, and target URL. Then fills placeholders, renames PROJECT/ to project slug, removes unused option files, makes the first commit, and optionally creates a GitHub/GitLab repo. Run this FIRST after cloning the template. Distinct from the user-level `project-init` skill (general-purpose project bootstrap) and `agent-team-setup` (multi-agent workflow installer for ANY existing project).
 ---
 
 You are running the project initialization walkthrough for a new Claude Code project built from `claude-code-project-template`.
