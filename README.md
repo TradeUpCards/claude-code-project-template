@@ -62,6 +62,7 @@ These live at `~/.claude/skills/` and are available in EVERY project, including 
 | `langfuse` | Langfuse helpers |
 | `frontend-skill` | Visually strong landing pages / UI |
 | `weekly-prd` | Generate weekly PRD + task checklist for multi-week sprints |
+| `prd-checklist` | Extract requirements from PRD (PDF/MD/TXT) → interactive HTML checklist with localStorage progress + filter buttons + hard-gate badges |
 
 ### Coordination scaffolding
 - **`.gauntlet/PROJECT/`** (renamed to `.gauntlet/<project-name>/` on init) — `in-flight.md` (workstream rules + file ownership map), `kickoff/` (per-lead boot prompts), `handoffs/` (per-lead handoff files), `sessions/` (per-session recaps), `coordination/` (cross-lead negotiation threads), `candidates/_candidates.md` (story-capture seed for `.gauntlet/<slug>/`)
@@ -75,6 +76,7 @@ These live at `~/.claude/skills/` and are available in EVERY project, including 
 
 ### Documentation
 - **`TEMPLATE_GUIDE.md`** — architecture of the template + Option A/B/C decision tree + when to use which pattern
+- **`MEMORY_PATTERNS.md`** — how Claude sessions persist knowledge across `/clear` boundaries (auto-memory, session handoffs, session summaries, lead handoffs, story candidates); the discipline loop; anti-patterns to avoid
 
 ---
 
@@ -100,11 +102,11 @@ Tier 2 (could add in v0.2):
 - `.pre-commit-config.yaml` templates (Python / Node)
 - `.gitlab-ci.yml` template
 - `pyproject.toml` / `package.json` templates
-- `docs/ARCHITECTURE.md` outline template
+- `docs/ARCHITECTURE.md` outline template (mostly handled by user-level `presearch-interview` skill)
 - `docs/MVP-WORK-PLAN.md` template
 
 Tier 3 (could add in v1.0):
-- PRD-PDF → interactive HTML checklist extraction skill
+- ~~PRD-PDF → interactive HTML checklist extraction skill~~ — **shipped at user-level as `prd-checklist`** (v0.1.2)
 - Interactive HTML work-plan tracker generator
 - `THREAT_MODEL.md` template (security projects)
 - `RESPONSIBLE_USE.md` template (dual-use AI projects)

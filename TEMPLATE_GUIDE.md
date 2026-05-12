@@ -10,6 +10,7 @@ This document explains how the template is structured, what every file does, and
 claude-code-project-template/
 ├── README.md                                 # User-facing quick start
 ├── TEMPLATE_GUIDE.md                         # This file
+├── MEMORY_PATTERNS.md                        # How Claude sessions persist knowledge (auto-memory, handoffs, summaries, candidates) + discipline loop + anti-patterns
 ├── CLAUDE_SESSION_HANDOFF.md                 # Primer for fresh Tate sessions (you fill in placeholders at init)
 ├── LICENSE                                   # Apache 2.0 (template's own license; project picks its own)
 ├── .gitignore                                # Generic; replaced by /init-project with Python or Node variant
