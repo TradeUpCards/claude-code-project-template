@@ -1,0 +1,4 @@
+# This directory holds cross-lead coordination threads (Option C, when needed).
+# Naming: <lead-a>-<lead-b>-<topic>.md (alphabetical by lead name)
+# Use when two leads need to negotiate scope/contracts/sequencing.
+# Don't duplicate workstream state from in-flight.md here.

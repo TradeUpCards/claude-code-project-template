@@ -1,0 +1,30 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+secrets/
+credentials.json
+*.pem
+*.key
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+.Trashes
+desktop.ini
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Project-specific (uncomment / customize as needed)

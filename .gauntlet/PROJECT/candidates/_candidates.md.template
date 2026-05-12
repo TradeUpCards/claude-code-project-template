@@ -1,0 +1,15 @@
+# Story Candidates — {{PROJECT_NAME}}
+
+Append low-threshold every time something interesting happens during the build. Lift to `/story` when an entry is genuinely novel or when 3+ related entries pile up.
+
+Format:
+```
+## YYYY-MM-DD HH:MM — <short title>
+- What happened
+- Why it matters / what it teaches
+- Source: file path or session summary if applicable
+```
+
+---
+
+_(no candidates yet — first entry goes here once the project ships something noteworthy)_

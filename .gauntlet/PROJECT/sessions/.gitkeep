@@ -1,0 +1,3 @@
+# This directory holds per-session summary files (substantive sessions only).
+# Naming: YYYY-MM-DD-<short-suffix>.md
+# Write at end of substantive sessions (>1 hr work). No raw sensitive data, no secrets, no log dumps.

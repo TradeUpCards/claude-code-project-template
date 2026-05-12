@@ -1,0 +1,28 @@
+# Default .gitignore for the TEMPLATE repo itself.
+# After /init-project runs in your new project, this file is replaced
+# by the chosen variant from GITIGNORE_OPTIONS/.
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+secrets/
+credentials.json
+*.pem
+*.key
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+.Trashes
+desktop.ini
+Thumbs.db

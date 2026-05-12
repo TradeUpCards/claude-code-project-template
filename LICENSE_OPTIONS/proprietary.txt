@@ -1,0 +1,17 @@
+PROPRIETARY SOFTWARE LICENSE
+
+Copyright (c) {{YEAR}} {{COPYRIGHT_HOLDER}}. All rights reserved.
+
+This software and all associated documentation, code, and artifacts are the
+proprietary and confidential property of {{COPYRIGHT_HOLDER}}.
+
+NO LICENSE IS GRANTED. The receipt or possession of this software does not
+convey any rights to reproduce, disclose, distribute, modify, sublicense, or
+create derivative works of any portion of this software, in whole or in part,
+without the express prior written consent of {{COPYRIGHT_HOLDER}}.
+
+Use, reproduction, distribution, modification, or disclosure of this software
+without express written authorization is strictly prohibited and may result in
+civil and criminal penalties.
+
+For licensing inquiries, contact {{CONTACT_EMAIL_OR_URL}}.

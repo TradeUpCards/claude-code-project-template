@@ -1,0 +1,3 @@
+# This directory holds per-lead handoff files (Option C only).
+# Files appear here as leads write their handoffs at /clear time.
+# Naming: <lead-name>-handoff.md (e.g., aria-handoff.md, bram-handoff.md).

@@ -1,0 +1,95 @@
+# In-Flight Workstreams — {{PROJECT_NAME}}
+
+**Purpose:** coordinate parallel Claude Code sessions so they don't step on each other's files, branches, or memory. Each session reads this file **before editing anything** and updates the In Flight section **before exiting**.
+
+This is a working document. The "Leads," "File ownership," and "Rules" sections stay stable; "In Flight" and "Cross-workstream notes" change as work happens.
+
+---
+
+## Leads
+
+Named main-agent leads, one per parallel workstream. The name is the identifier across sessions, handoff files, and memory hygiene.
+
+| Lead name | Workstream | Active in | Handoff file | Kickoff file |
+|---|---|---|---|---|
+| **Tate** (gauntlet-team-lead in main checkout) | Coordination + cross-cutting work + solo phases | All phases | `./CLAUDE_SESSION_HANDOFF.md` (repo root) | (none — Tate operates from the global handoff) |
+| **Aria** | {{ARIA_WORKSTREAM}} | _(fill as phases activate)_ | `.gauntlet/{{PROJECT_SLUG}}/handoffs/aria-handoff.md` | `.gauntlet/{{PROJECT_SLUG}}/kickoff/aria.md` |
+| **Bram** | {{BRAM_WORKSTREAM}} | _(fill as phases activate)_ | `.gauntlet/{{PROJECT_SLUG}}/handoffs/bram-handoff.md` | `.gauntlet/{{PROJECT_SLUG}}/kickoff/bram.md` |
+| **Cleo** | {{CLEO_WORKSTREAM}} | _(fill as phases activate)_ | `.gauntlet/{{PROJECT_SLUG}}/handoffs/cleo-handoff.md` | `.gauntlet/{{PROJECT_SLUG}}/kickoff/cleo.md` |
+
+---
+
+## Setup
+
+W3-style projects do NOT use git worktrees by default. All leads work in the main checkout on the {{DEFAULT_BRANCH}} branch (or feature branches per change cluster).
+
+**To start a lead session:**
+1. Open a new Claude Code terminal in `<project root>`.
+2. Invoke `/aria` or `/bram` or `/cleo` (project skill at `.claude/skills/<name>/SKILL.md`).
+3. The persona system prompt (`.claude/agents/<name>.md`) makes the agent operate as that named lead.
+
+Multiple leads CAN run concurrently in separate terminal windows — file ownership separation prevents collisions.
+
+**For background-mode parallel work** from Tate's session:
+```python
+Agent(subagent_type: aria, prompt: "[lead-specific kickoff brief]", run_in_background: true)
+Agent(subagent_type: bram, prompt: "[lead-specific kickoff brief]", run_in_background: true)
+```
+
+---
+
+## File ownership map
+
+**Enforced by persona instruction. Violations should RAISE, not silently edit.**
+
+### Aria's owned files
+{{ARIA_OWNED_FILES}}
+
+### Bram's owned files
+{{BRAM_OWNED_FILES}}
+
+### Cleo's owned files
+{{CLEO_OWNED_FILES}}
+
+### Shared files (require coordination before edit)
+
+_(Add rows as shared-file conflicts emerge.)_
+
+| File | Owners | Coordination rule |
+|---|---|---|
+| `CLAUDE_SESSION_HANDOFF.md` (repo root) | Tate only | Lead handoffs go to `.gauntlet/{{PROJECT_SLUG}}/handoffs/<name>-handoff.md`. The global handoff is for Tate-to-Tate session continuity. |
+| `.claude/agents/**`, `.claude/skills/**`, `.claude/settings.json` | Tate / setup-time only | Persona / skill / settings changes require Tate-level coordination. |
+
+---
+
+## Rules (apply to every lead)
+
+1. Read `.gauntlet/{{PROJECT_SLUG}}/in-flight.md` (this file) before any edit.
+2. Read your handoff (`.gauntlet/{{PROJECT_SLUG}}/handoffs/<name>-handoff.md`) before any edit.
+3. Read your kickoff (`.gauntlet/{{PROJECT_SLUG}}/kickoff/<name>.md`) before any edit.
+4. Restate to the user before any edit: identity, mission, what's risky, your next concrete edit.
+5. Wait for user confirmation before any edit.
+6. **Do not edit files outside your ownership.** RAISE if a task requires it.
+7. **Do not weaken architectural commitments** without sign-off (schemas, security gates, cost guards, trust gates).
+8. **No secrets / API keys / HMAC tokens / cloud credentials** in any committed file. Use `.env`.
+9. **No raw sensitive data** (PHI / PII / patient data / etc.) in any committed file. Synthetic / sentinel data only.
+10. Update In Flight (below) when you START or FINISH a session.
+11. Write/update your handoff file before `/clear` or exit.
+
+---
+
+## In Flight
+
+**(Update when you start or finish a session. Empty = no leads currently active.)**
+
+| Lead | Status | Started | Last touch | Branch | Next action |
+|---|---|---|---|---|---|
+| _(no leads currently active)_ | | | | | |
+
+---
+
+## Cross-workstream notes
+
+**(Use when a decision affects multiple leads. Append-only.)**
+
+_(none yet)_
