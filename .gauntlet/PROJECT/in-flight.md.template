@@ -21,16 +21,41 @@ Named main-agent leads, one per parallel workstream. The name is the identifier 
 
 ## Setup
 
-W3-style projects do NOT use git worktrees by default. All leads work in the main checkout on the {{DEFAULT_BRANCH}} branch (or feature branches per change cluster).
+This project supports two coordination modes — see `WORKTREE_PATTERNS.md` at repo root for the full decision tree, setup recipes, and failure modes.
+
+### Mode 1 — Single checkout (default)
+
+All leads work in the same physical folder on the `{{DEFAULT_BRANCH}}` branch (or feature branches per change cluster). File ownership enforced by `.claude/agents/<name>.md` persona instruction.
 
 **To start a lead session:**
 1. Open a new Claude Code terminal in `<project root>`.
 2. Invoke `/aria` or `/bram` or `/cleo` (project skill at `.claude/skills/<name>/SKILL.md`).
 3. The persona system prompt (`.claude/agents/<name>.md`) makes the agent operate as that named lead.
 
-Multiple leads CAN run concurrently in separate terminal windows — file ownership separation prevents collisions.
+Multiple leads CAN run concurrently in separate terminal windows — file ownership separation prevents collisions. Use Mode 1 for short builds (≤5 days) and small teams (1-2 concurrent leads).
 
-**For background-mode parallel work** from Tate's session:
+### Mode 2 — Per-lead worktrees (escalate when Mode 1 bites)
+
+When 2+ leads do sustained parallel code work over multiple days, create per-lead git worktrees with junctions to share `.project/` and `.claude/`. Setup recipe in `WORKTREE_PATTERNS.md`. In short:
+
+```bash
+# From the main checkout
+git worktree add ../<project>-aria -b crt/aria-day1
+git worktree add ../<project>-bram -b crt/bram-day1
+
+# In each worktree, junction the coordination dirs
+cd ../<project>-aria
+cmd //c mklink /J .project ..\\<project>\\.project    # Windows
+cmd //c mklink /J .claude  ..\\<project>\\.claude
+# Unix: ln -s ../<project>/.project .project ; ln -s ../<project>/.claude .claude
+```
+
+Then open Cursor on the lead's worktree and run their slash command from there. **Always remove junctions BEFORE `git worktree remove`** (see WORKTREE_PATTERNS.md "Failure modes").
+
+### Background-mode dispatch (works in either mode)
+
+Tate can dispatch leads from its main session via the `Agent` tool with `run_in_background: true`. Two `Agent` calls in one message → both leads run in parallel:
+
 ```python
 Agent(subagent_type: aria, prompt: "[lead-specific kickoff brief]", run_in_background: true)
 Agent(subagent_type: bram, prompt: "[lead-specific kickoff brief]", run_in_background: true)
