@@ -109,7 +109,8 @@ See `TEMPLATE_GUIDE.md` for the full decision tree.
 
 ## Version history
 
-- **v0.2.0** (current) — Breaking change: `.gauntlet/` renamed to `.project/` throughout the template (matches user-level `project-init` skill convention; AgentForge-style projects keep `.gauntlet/`). `/use-template` now prompts for worktree mode (Mode 1 single-checkout / Mode 2 per-lead worktrees). Added `WORKTREE_PATTERNS.md`, `scripts/install-recommended-skills.{sh,ps1}`, and `scripts/README.md`.
+- **v0.2.1** (current) — Added `scripts/lead-launchers.{sh,ps1}` — source-able shell functions providing `start_lead` / `finish_lead` (and per-lead aliases like `start_aria`, `finish_bram`, etc.) that automate per-lead worktree setup + teardown with all safety preconditions baked in (clean / merged / pushed / junction-FIRST removal). Streamlined port of the W2 AgentForge launcher (1400 lines → 250 lines per shell).
+- **v0.2.0** — Breaking change: `.gauntlet/` renamed to `.project/` throughout the template (matches user-level `project-init` skill convention; AgentForge-style projects keep `.gauntlet/`). `/use-template` now prompts for worktree mode (Mode 1 single-checkout / Mode 2 per-lead worktrees). Added `WORKTREE_PATTERNS.md`, `scripts/install-recommended-skills.{sh,ps1}`, and `scripts/README.md`.
 - **v0.1.2** — Added `MEMORY_PATTERNS.md` and user-level `prd-checklist` skill reference.
 - **v0.1.1** — Ported `/story`, `/build-audit`, `/daily-sync` from AgentForge. Renamed `/init-project` → `/use-template` to avoid collision with user-level `project-init`.
 - **v0.1.0** — Initial release. Generic gauntlet-team-lead persona + 5 generic teammate types + 3 named-lead persona templates + `/use-template` + `/session-handoff` + LICENSE/gitignore choosers.

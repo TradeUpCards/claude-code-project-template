@@ -173,7 +173,7 @@ git worktree remove ../MyProject-aria
 git branch -d crt/aria-day1   # if merged
 ```
 
-**W2 had `start_<lead>` / `finish_<lead>` shell launchers** that automated all of this. They're worth porting if you do this 3+ times. Until then, the manual recipe above is fine.
+**Use `scripts/lead-launchers.{sh,ps1}` to automate all of this.** Source it from your shell profile, then `start_aria` / `finish_aria` (or `Start-Aria` / `Finish-Aria` in PowerShell) handle the worktree creation, junction setup, and safety-checked teardown — including the junction-FIRST removal discipline. See `scripts/README.md` for details. The manual recipe above remains useful for understanding what the launcher does under the hood.
 
 ---
 
