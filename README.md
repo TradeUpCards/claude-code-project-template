@@ -135,7 +135,7 @@ Tier 3 (could add in v1.0):
 - `THREAT_MODEL.md` template (security projects)
 - `RESPONSIBLE_USE.md` template (dual-use AI projects)
 - Multi-language scaffolds (Rust / Go)
-- `start_<lead>` / `finish_<lead>` shell launchers (W2 had these for worktree setup/teardown automation)
+- ~~`start_<lead>` / `finish_<lead>` shell launchers~~ — **shipped as `scripts/lead-launchers.{sh,ps1}`** (v0.2.1)
 
 If you want Tier 2 or Tier 3 ahead of those landing in the template, copy the relevant files from a project that has them (e.g., `ClinicalRedTeam` has Tier 3 examples).
 
