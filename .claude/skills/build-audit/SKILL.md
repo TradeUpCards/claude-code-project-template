@@ -3,11 +3,11 @@ name: build-audit
 description: PM-style audit of what was built, why decisions were made, what's deferred, what's a differentiator beyond the PRD, what the PRD itself got wrong, what a hostile reviewer would attack, and how to communicate to graders / employers / stakeholders. Invoke when user types `/build-audit`, asks for a "build review", "scope audit", "PRD compliance check", "what did we ship this week", "what would a reviewer push back on", or "what's wrong with our PRD". Distinct from technical reviews (agent-review, system-architecture-review, ai-security-review) which audit code quality — this audits coverage, decisions, narrative, and defensibility.
 config:
   # Override these per project. The skill body refers to them by name.
-  AUDITS_DIR: .gauntlet/audits
+  AUDITS_DIR: .project/audits
   # Discovery hint paths — the skill SEARCHES for these patterns by default.
   # Override only if your project uses non-standard names.
   PRD_PATTERNS:
-    - .gauntlet/week*/prd.md
+    - .project/week*/prd.md
     - PRD.md
     - prd.md
     - docs/prd.md
@@ -21,7 +21,7 @@ config:
     - docs/adr/*.md
   HANDOFF_PATTERNS:
     - CLAUDE_SESSION_HANDOFF.md
-    - .gauntlet/week*/handoff*.md
+    - .project/week*/handoff*.md
     - HANDOFF.md
     - STATUS.md
   RISKS_PATTERNS:
@@ -30,8 +30,8 @@ config:
     - SECURITY.md
     - docs/threat-model.md
   SLIDES_PATTERNS:
-    - .gauntlet/**/*slides*.md
-    - .gauntlet/**/*video*.md
+    - .project/**/*slides*.md
+    - .project/**/*video*.md
     - docs/slides/*.md
 ---
 

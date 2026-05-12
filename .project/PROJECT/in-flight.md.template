@@ -13,9 +13,9 @@ Named main-agent leads, one per parallel workstream. The name is the identifier 
 | Lead name | Workstream | Active in | Handoff file | Kickoff file |
 |---|---|---|---|---|
 | **Tate** (gauntlet-team-lead in main checkout) | Coordination + cross-cutting work + solo phases | All phases | `./CLAUDE_SESSION_HANDOFF.md` (repo root) | (none — Tate operates from the global handoff) |
-| **Aria** | {{ARIA_WORKSTREAM}} | _(fill as phases activate)_ | `.gauntlet/{{PROJECT_SLUG}}/handoffs/aria-handoff.md` | `.gauntlet/{{PROJECT_SLUG}}/kickoff/aria.md` |
-| **Bram** | {{BRAM_WORKSTREAM}} | _(fill as phases activate)_ | `.gauntlet/{{PROJECT_SLUG}}/handoffs/bram-handoff.md` | `.gauntlet/{{PROJECT_SLUG}}/kickoff/bram.md` |
-| **Cleo** | {{CLEO_WORKSTREAM}} | _(fill as phases activate)_ | `.gauntlet/{{PROJECT_SLUG}}/handoffs/cleo-handoff.md` | `.gauntlet/{{PROJECT_SLUG}}/kickoff/cleo.md` |
+| **Aria** | {{ARIA_WORKSTREAM}} | _(fill as phases activate)_ | `.project/{{PROJECT_SLUG}}/handoffs/aria-handoff.md` | `.project/{{PROJECT_SLUG}}/kickoff/aria.md` |
+| **Bram** | {{BRAM_WORKSTREAM}} | _(fill as phases activate)_ | `.project/{{PROJECT_SLUG}}/handoffs/bram-handoff.md` | `.project/{{PROJECT_SLUG}}/kickoff/bram.md` |
+| **Cleo** | {{CLEO_WORKSTREAM}} | _(fill as phases activate)_ | `.project/{{PROJECT_SLUG}}/handoffs/cleo-handoff.md` | `.project/{{PROJECT_SLUG}}/kickoff/cleo.md` |
 
 ---
 
@@ -82,16 +82,16 @@ _(Add rows as shared-file conflicts emerge.)_
 
 | File | Owners | Coordination rule |
 |---|---|---|
-| `CLAUDE_SESSION_HANDOFF.md` (repo root) | Tate only | Lead handoffs go to `.gauntlet/{{PROJECT_SLUG}}/handoffs/<name>-handoff.md`. The global handoff is for Tate-to-Tate session continuity. |
+| `CLAUDE_SESSION_HANDOFF.md` (repo root) | Tate only | Lead handoffs go to `.project/{{PROJECT_SLUG}}/handoffs/<name>-handoff.md`. The global handoff is for Tate-to-Tate session continuity. |
 | `.claude/agents/**`, `.claude/skills/**`, `.claude/settings.json` | Tate / setup-time only | Persona / skill / settings changes require Tate-level coordination. |
 
 ---
 
 ## Rules (apply to every lead)
 
-1. Read `.gauntlet/{{PROJECT_SLUG}}/in-flight.md` (this file) before any edit.
-2. Read your handoff (`.gauntlet/{{PROJECT_SLUG}}/handoffs/<name>-handoff.md`) before any edit.
-3. Read your kickoff (`.gauntlet/{{PROJECT_SLUG}}/kickoff/<name>.md`) before any edit.
+1. Read `.project/{{PROJECT_SLUG}}/in-flight.md` (this file) before any edit.
+2. Read your handoff (`.project/{{PROJECT_SLUG}}/handoffs/<name>-handoff.md`) before any edit.
+3. Read your kickoff (`.project/{{PROJECT_SLUG}}/kickoff/<name>.md`) before any edit.
 4. Restate to the user before any edit: identity, mission, what's risky, your next concrete edit.
 5. Wait for user confirmation before any edit.
 6. **Do not edit files outside your ownership.** RAISE if a task requires it.

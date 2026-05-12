@@ -39,8 +39,8 @@ claude-code-project-template/
 │       ├── bram/SKILL.md.template            # OPTION C: /bram slash command
 │       └── cleo/SKILL.md.template            # OPTION C: /cleo slash command
 │
-├── .gauntlet/
-│   ├── PROJECT/                              # Renamed to .gauntlet/<project-slug>/ by /use-template
+├── .project/
+│   ├── PROJECT/                              # Renamed to .project/<project-slug>/ by /use-template
 │   │   ├── README.md                         # Directory layout doc
 │   │   ├── in-flight.md.template             # Workstream rules + file ownership map
 │   │   ├── kickoff/                          # Per-lead boot prompts (filled by /use-template)
@@ -98,7 +98,7 @@ Template files use `{{PLACEHOLDER}}` syntax. `/init-project` substitutes:
 After `/init-project` runs:
 - Files lose their `.template` extension
 - Placeholders are replaced
-- `.gauntlet/PROJECT/` is renamed to `.gauntlet/<project-slug>/`
+- `.project/PROJECT/` is renamed to `.project/<project-slug>/`
 - Unused option files (e.g., aria/bram/cleo if Option B chosen) are removed
 
 ---
@@ -115,14 +115,14 @@ After `/init-project` runs:
 **What `/init-project` removes:**
 - All `.claude/agents/aria.md.template`, `bram.md.template`, `cleo.md.template`
 - All `.claude/skills/aria/`, `bram/`, `cleo/`
-- `.gauntlet/PROJECT/kickoff/aria.md.template`, `bram.md.template`, `cleo.md.template`
-- `.gauntlet/PROJECT/in-flight.md.template`
-- `.gauntlet/PROJECT/handoffs/`, `coordination/` (you don't need them)
+- `.project/PROJECT/kickoff/aria.md.template`, `bram.md.template`, `cleo.md.template`
+- `.project/PROJECT/in-flight.md.template`
+- `.project/PROJECT/handoffs/`, `coordination/` (you don't need them)
 
 **What you keep:**
 - `.claude/agents/gauntlet-team-lead.md`
 - `.claude/skills/init-project/`, `session-handoff/`, `tate/`
-- `.gauntlet/<project-slug>/sessions/`, `candidates/`
+- `.project/<project-slug>/sessions/`, `candidates/`
 - `CLAUDE_SESSION_HANDOFF.md`
 
 **Upgrade path:** A → B is ~30 min (just keep the generic teammate type files); A → C is ~2-3 hrs.
@@ -171,10 +171,10 @@ Multiple dispatches in a single message run in parallel.
 - All Option B files
 - Named-lead personas (aria/bram/cleo)
 - Slash command skills (/aria, /bram, /cleo)
-- Per-lead kickoff files in `.gauntlet/PROJECT/kickoff/`
+- Per-lead kickoff files in `.project/PROJECT/kickoff/`
 - Per-lead handoff dirs (handoffs/)
 - Cross-lead coordination dir (coordination/)
-- `.gauntlet/PROJECT/in-flight.md` workstream rules + file ownership map
+- `.project/PROJECT/in-flight.md` workstream rules + file ownership map
 
 **How you dispatch in Option C:**
 
@@ -215,7 +215,7 @@ Day 0
 Day 1
 ├── Run /tate at session start → 4-line morning report
 ├── Solo Tate work on Phase 1a / setup items
-├── Mid-session: capture story moments to .gauntlet/<slug>/candidates/_candidates.md
+├── Mid-session: capture story moments to .project/<slug>/candidates/_candidates.md
 └── Before /clear: run /session-handoff → updates CLAUDE_SESSION_HANDOFF.md
 
 Day 2-N (Option C example)

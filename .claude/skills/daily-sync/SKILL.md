@@ -36,7 +36,7 @@ Without this discipline you fall into "I'll guess what each lead is doing from t
 ### Default — lead-attested (use this unless explicitly overridden)
 
 1. Main session emits the lead-side attestation prompt (below)
-2. User pastes the prompt into each open lead session (Aria's, Bram's, Cleo's, or any custom-named leads in this project per `.gauntlet/<project-slug>/in-flight.md`). If a lead isn't currently open, user opens a Cursor terminal in the project root and runs `/aria` (or the relevant lead slash command) to start one.
+2. User pastes the prompt into each open lead session (Aria's, Bram's, Cleo's, or any custom-named leads in this project per `.project/<project-slug>/in-flight.md`). If a lead isn't currently open, user opens a Cursor terminal in the project root and runs `/aria` (or the relevant lead slash command) to start one.
 3. Each lead executes its existing `session-handoff` skill in mid-session mode (target = its own `<lead>-handoff.md`), prints a 4-line TLDR, and returns to whatever it was doing — does NOT `/exit`
 4. User says "done" or pastes the 3 TLDRs back to main session
 5. Main session reads the freshly-attested handoffs + default-branch git state + `in-flight.md` + recent merges, produces the synthesis report
@@ -60,12 +60,12 @@ runs, no commits, no merges.
    - `git status` (uncommitted changes)
    - `git log --oneline -5` (recent commits)
    - `git rev-list --count <default-branch>..HEAD` (commits ahead of the project's default branch)
-   - Your row in `.gauntlet/<project-slug>/in-flight.md`
+   - Your row in `.project/<project-slug>/in-flight.md`
    - Your most recent ~30 turns of conversation history in this session for what's truly current vs. what's stale in your handoff
 
 2. Run your existing session-handoff skill at `.claude/skills/session-handoff/SKILL.md`
    with these MID-SESSION adjustments:
-   - Output target: `.gauntlet/<project-slug>/handoffs/<lead>-handoff.md` (not the global
+   - Output target: `.project/<project-slug>/handoffs/<lead>-handoff.md` (not the global
      `./CLAUDE_SESSION_HANDOFF.md` — that's owned by main-checkout sessions)
    - At the top of the file, set:
      **Last attested:** <YYYY-MM-DD HH:MM Central> via /daily-sync

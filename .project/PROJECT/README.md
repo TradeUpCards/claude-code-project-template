@@ -1,11 +1,11 @@
-# `.gauntlet/{{PROJECT_SLUG}}/` — Coordination & Session Memory
+# `.project/{{PROJECT_SLUG}}/` — Coordination & Session Memory
 
 This directory holds **coordination artifacts that don't belong in the main repo** but need to persist across Claude Code sessions for {{PROJECT_NAME}}.
 
 ## Layout
 
 ```
-.gauntlet/{{PROJECT_SLUG}}/
+.project/{{PROJECT_SLUG}}/
 ├── README.md             ← this file
 ├── in-flight.md          ← workstream rules + file ownership map (Option B/C)
 ├── kickoff/              ← per-lead boot prompts

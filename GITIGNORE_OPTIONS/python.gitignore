@@ -80,4 +80,4 @@ desktop.ini
 # Project-specific (uncomment / customize as needed)
 # evals/results/*/
 # logs/
-# .gauntlet/*/sessions/*-local.md
+# .project/*/sessions/*-local.md

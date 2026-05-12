@@ -12,13 +12,13 @@ Claude Code sessions can lose context for three reasons: `/clear`, `/compact`, o
 |---|---|---|---|
 | **Auto-memory** | `~/.claude/projects/<project-slug>/memory/MEMORY.md` | Auto-loaded by Claude at every session start in that project | Short-form facts the user wants permanently remembered (file paths, decisions, conventions, gotchas). Cross-session, persistent forever. |
 | **Session handoff** | `./CLAUDE_SESSION_HANDOFF.md` (repo root) | Read at every session start by the gauntlet-team-lead persona; refreshed at session end | Operational state: current objective, decisions THIS session, files touched, tests/evals status, next PM prompt, recommended team formation |
-| **Session summary** | `.gauntlet/<slug>/sessions/<YYYY-MM-DD>-<suffix>.md` | Written at end of substantive sessions; read on-demand for historical context | Long-form narrative recap: what happened, why decisions were made, what worked, what didn't |
+| **Session summary** | `.project/<slug>/sessions/<YYYY-MM-DD>-<suffix>.md` | Written at end of substantive sessions; read on-demand for historical context | Long-form narrative recap: what happened, why decisions were made, what worked, what didn't |
 
 Plus, in Option C named-lead projects:
 
 | Layer | Where | When used | What goes here |
 |---|---|---|---|
-| **Lead handoff** | `.gauntlet/<slug>/handoffs/<lead-name>-handoff.md` | Per-lead — written by Aria/Bram/Cleo at their session exit | Lead-specific operational state mirroring the global handoff but scoped to that lead's workstream |
+| **Lead handoff** | `.project/<slug>/handoffs/<lead-name>-handoff.md` | Per-lead — written by Aria/Bram/Cleo at their session exit | Lead-specific operational state mirroring the global handoff but scoped to that lead's workstream |
 
 ---
 
@@ -55,7 +55,7 @@ A useful test: if the answer to "is this still true 6 months from now?" is yes �
 
 ### Pattern: short entries with pointers to long-form details
 
-The auto-memory file gets injected into every session's context. **Keep entries short** — 1-2 lines each. For details, point at a longer artifact in the project's `.gauntlet/` directory.
+The auto-memory file gets injected into every session's context. **Keep entries short** — 1-2 lines each. For details, point at a longer artifact in the project's `.project/` directory.
 
 Good entry:
 ```markdown
@@ -130,7 +130,7 @@ Without this file, every fresh session starts from zero — re-reads the codebas
 
 ### What it is
 
-A long-form narrative recap of a substantive session, written to `.gauntlet/<project-slug>/sessions/<YYYY-MM-DD>-<short-suffix>.md`.
+A long-form narrative recap of a substantive session, written to `.project/<project-slug>/sessions/<YYYY-MM-DD>-<short-suffix>.md`.
 
 ### When to write one
 
@@ -164,7 +164,7 @@ If you have cloud-synced personal storage, mirror the session summary there too.
 
 ### Why per-lead
 
-In Option C named-lead projects (Aria/Bram/Cleo with persistent identity), each lead gets its own handoff at `.gauntlet/<slug>/handoffs/<lead>-handoff.md`. This separates lead-scoped operational state from the global state.
+In Option C named-lead projects (Aria/Bram/Cleo with persistent identity), each lead gets its own handoff at `.project/<slug>/handoffs/<lead>-handoff.md`. This separates lead-scoped operational state from the global state.
 
 The global `CLAUDE_SESSION_HANDOFF.md` is owned by Tate (main session). Each lead's handoff is owned by that lead.
 
@@ -180,8 +180,8 @@ This prevents the failure mode where the main session synthesizes from stale han
 
 ### Where
 
-`.gauntlet/<slug>/candidates/_candidates.md` — project-specific story candidates (within the workstream coordination dir)
-`.gauntlet/stories/_candidates.md` — cross-project / portfolio-level story candidates
+`.project/<slug>/candidates/_candidates.md` — project-specific story candidates (within the workstream coordination dir)
+`.project/stories/_candidates.md` — cross-project / portfolio-level story candidates
 
 ### What
 
@@ -191,8 +191,8 @@ When a candidate accumulates enough material (or a single moment is genuinely no
 
 ### Why two locations
 
-- **Project-specific candidates** stay with the project (in `.gauntlet/<slug>/candidates/`)
-- **Cross-project / portfolio candidates** live in `.gauntlet/stories/` (the `/story` skill's default `STORIES_DIR`)
+- **Project-specific candidates** stay with the project (in `.project/<slug>/candidates/`)
+- **Cross-project / portfolio candidates** live in `.project/stories/` (the `/story` skill's default `STORIES_DIR`)
 
 Both are valid; pick based on whether the moment is project-specific or portfolio-relevant.
 
@@ -214,7 +214,7 @@ During session
 
 Session end
 ├── /session-handoff → refreshes CLAUDE_SESSION_HANDOFF.md
-├── If substantive (>1 hr): write session summary to .gauntlet/<slug>/sessions/
+├── If substantive (>1 hr): write session summary to .project/<slug>/sessions/
 ├── Promote permanent facts to MEMORY.md (via /remember or manual edit)
 └── Safe to /clear or exit
 ```
@@ -227,7 +227,7 @@ Session end
 - **Session summary written but no handoff refresh** — handoff is what the next session reads first; summary is read on-demand. If only one gets written, it should be the handoff.
 - **Memory entries that are 50 lines long** — eats context permanently. Use pointer entries.
 - **Memory file with secrets / PHI** — auto-loaded into every session's context; one leak persists everywhere.
-- **Lead writing to global handoff** — only Tate owns `CLAUDE_SESSION_HANDOFF.md`. Leads write to `.gauntlet/<slug>/handoffs/<lead>-handoff.md`.
+- **Lead writing to global handoff** — only Tate owns `CLAUDE_SESSION_HANDOFF.md`. Leads write to `.project/<slug>/handoffs/<lead>-handoff.md`.
 - **Synthesis from stale handoffs treated as ground truth** — this is what `/daily-sync`'s lead-attested mode prevents. The `--quick` escape hatch must always be banner-flagged.
 
 ---
@@ -238,12 +238,12 @@ When you need to recover something from past sessions:
 
 | Question | Where to look |
 |---|---|
-| "What was decided about X?" | Search `CLAUDE_SESSION_HANDOFF.md` decisions table; if not there, search `.gauntlet/<slug>/sessions/*.md` |
-| "When did we ship Y?" | `git log --grep="Y"` + `.gauntlet/<slug>/sessions/*.md` for context |
+| "What was decided about X?" | Search `CLAUDE_SESSION_HANDOFF.md` decisions table; if not there, search `.project/<slug>/sessions/*.md` |
+| "When did we ship Y?" | `git log --grep="Y"` + `.project/<slug>/sessions/*.md` for context |
 | "Why did we choose X over Y?" | Decisions table in handoff; if architectural, also `ARCHITECTURE.md` decision-log section |
 | "What's the current operational state?" | `CLAUDE_SESSION_HANDOFF.md` Current Objective + Files Touched |
-| "What were Aria/Bram/Cleo doing?" | Their handoff files at `.gauntlet/<slug>/handoffs/` |
-| "What story candidates exist?" | `.gauntlet/<slug>/candidates/_candidates.md` (project) + `.gauntlet/stories/_candidates.md` (cross-project) |
+| "What were Aria/Bram/Cleo doing?" | Their handoff files at `.project/<slug>/handoffs/` |
+| "What story candidates exist?" | `.project/<slug>/candidates/_candidates.md` (project) + `.project/stories/_candidates.md` (cross-project) |
 | "Permanent facts about this project?" | `~/.claude/projects/<slug>/memory/MEMORY.md` |
 
 ---
@@ -255,14 +255,14 @@ When you need to recover something from past sessions:
 | `/use-template` | First-run; doesn't write to memory but sets up the directory structure all other layers depend on | Day 0 |
 | `/session-handoff` | Writes/refreshes `CLAUDE_SESSION_HANDOFF.md`; optionally writes session summary | End of every session |
 | `/daily-sync` | Coordinates per-lead handoff refreshes; produces synthesis report | Start of day / end of day / after recovery |
-| `/story` | Reads `.gauntlet/stories/_candidates.md`; writes structured story file; updates candidates + index | When a candidate is ready to promote |
-| `/build-audit` | Reads handoffs + decisions docs as discovery input; writes audit report to `.gauntlet/audits/<date>-build-audit.md` | End of week / before submission |
+| `/story` | Reads `.project/stories/_candidates.md`; writes structured story file; updates candidates + index | When a candidate is ready to promote |
+| `/build-audit` | Reads handoffs + decisions docs as discovery input; writes audit report to `.project/audits/<date>-build-audit.md` | End of week / before submission |
 | `/tate`, `/aria`, `/bram`, `/cleo` | Each reads its own handoff at session start; persona system prompt enforces handoff discipline at exit | Lead session boot/exit |
 
 User-level skills that interact with memory:
 - `presearch-interview` — produces ARCHITECTURE.md (read by handoff sections referencing architecture)
 - `prd-checklist` — produces PRD-REQUIREMENTS.html (read by sessions tracking build progress)
-- `weekly-prd` — produces `.gauntlet/week<N>/prd.md` + `tasks.md`
+- `weekly-prd` — produces `.project/week<N>/prd.md` + `tasks.md`
 - `agent-team-setup` — bootstraps multi-agent infra (replicates parts of this template's structure into existing projects)
 
 ---

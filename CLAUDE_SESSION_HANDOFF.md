@@ -14,7 +14,7 @@ This is a freshly-initialized project from `claude-code-project-template`. Run `
 - Verify git state (commit done, remote(s) set up)
 - Set up `.env` from `.env.example` if applicable
 - Read `README.md` to confirm project framing
-- If Option B/C: read `.gauntlet/{{PROJECT_SLUG}}/in-flight.md` for workstream coordination
+- If Option B/C: read `.project/{{PROJECT_SLUG}}/in-flight.md` for workstream coordination
 - Begin Phase 1 work per your project's plan
 
 After your first substantive session, run `/session-handoff` to refresh THIS file with real state.
@@ -99,4 +99,4 @@ _(Add project-specific hard rules here as they emerge.)_
 
 Before `/clear` or session exit, run `/session-handoff` to refresh this file. The skill at `.claude/skills/session-handoff/SKILL.md` walks the steps.
 
-If you're a named lead (Aria/Bram/Cleo in Option C), write to your lead-specific handoff at `.gauntlet/{{PROJECT_SLUG}}/handoffs/<name>-handoff.md` instead of this global file. Tate owns this global file.
+If you're a named lead (Aria/Bram/Cleo in Option C), write to your lead-specific handoff at `.project/{{PROJECT_SLUG}}/handoffs/<name>-handoff.md` instead of this global file. Tate owns this global file.

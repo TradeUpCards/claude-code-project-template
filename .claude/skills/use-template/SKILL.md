@@ -58,6 +58,22 @@ Derive `{{PROJECT_SLUG}}` from PROJECT_NAME by lowercasing + replacing spaces/un
 - Option C — Named leads Aria/Bram/Cleo (Recommended for builds 5+ days with parallel work)
 - Option C+ — Named leads with custom names (instead of Aria/Bram/Cleo)
 
+### 6.5. Worktree mode
+
+**Header:** `Worktree mode`
+**Question:** `When 2+ leads work in parallel, do you want each lead in their own git worktree (Mode 2), or all leads sharing the main checkout (Mode 1)? See WORKTREE_PATTERNS.md for the full decision tree.`
+**Options:**
+- Mode 1 — Single checkout (Recommended for short builds)
+- Mode 2 — Per-lead worktrees with .project/ + .claude/ junctions (For sustained multi-day parallel work)
+- Decide later — set up Mode 1 now; can escalate to Mode 2 mid-build if needed
+
+If user picks Mode 2, also ask:
+**Header:** `Worktree paths`
+**Question:** `What sibling-path naming convention? Defaults to '<project>-<lead>' (e.g., MyProject-aria, MyProject-bram, MyProject-cleo).`
+**Options:**
+- `<project>-<lead>` (Recommended; matches W2/W3 convention)
+- Custom pattern (provide via Other)
+
 ### 7. Hard deadlines
 **Header:** `MVP deadline`
 **Question:** `What's the MVP deadline (or "none")?`
@@ -123,23 +139,23 @@ Find every `.template` file. For each:
 4. Delete the original `.template` file
 
 ### 3.4 Rename PROJECT/ directory
-Rename `.gauntlet/PROJECT/` to `.gauntlet/<PROJECT_SLUG>/`.
+Rename `.project/PROJECT/` to `.project/<PROJECT_SLUG>/`.
 
 ### 3.5 (Option A) Remove unused infra
 If Option A:
 - Delete `.claude/agents/{aria,bram,cleo}.md`
 - Delete `.claude/skills/{aria,bram,cleo}/`
-- Delete `.gauntlet/<slug>/kickoff/{aria,bram,cleo}.md`
-- Delete `.gauntlet/<slug>/in-flight.md`
-- Delete `.gauntlet/<slug>/handoffs/`, `coordination/`
+- Delete `.project/<slug>/kickoff/{aria,bram,cleo}.md`
+- Delete `.project/<slug>/in-flight.md`
+- Delete `.project/<slug>/handoffs/`, `coordination/`
 - Delete `.claude/agents/implementation-lead.md`, `quality-lead.md`, `delivery-lead.md`, `observability-security-teammate.md`, `codebase-mapper.md` (Option A doesn't use generic teammates either)
 
 ### 3.6 (Option B) Remove only Option-C-specific infra
 If Option B:
 - Delete `.claude/agents/{aria,bram,cleo}.md`
 - Delete `.claude/skills/{aria,bram,cleo}/`
-- Delete `.gauntlet/<slug>/kickoff/{aria,bram,cleo}.md`
-- Keep `.gauntlet/<slug>/in-flight.md`, `handoffs/`, `coordination/` (still useful for ad-hoc dispatches)
+- Delete `.project/<slug>/kickoff/{aria,bram,cleo}.md`
+- Keep `.project/<slug>/in-flight.md`, `handoffs/`, `coordination/` (still useful for ad-hoc dispatches)
 - Keep generic teammate types in `.claude/agents/`
 
 ### 3.7 (Option C / C+) Keep everything; ensure custom names applied
@@ -147,7 +163,7 @@ If Option C+:
 - Rename `.claude/agents/aria.md` → `.claude/agents/<custom_name_1>.md` (and update content's `name:` field)
 - Same for bram, cleo
 - Same for `.claude/skills/aria/` etc.
-- Same for `.gauntlet/<slug>/kickoff/aria.md` etc.
+- Same for `.project/<slug>/kickoff/aria.md` etc.
 - Update gauntlet-team-lead.md's "Available teammates" section to reference custom names
 
 ### 3.8 Update CLAUDE_SESSION_HANDOFF.md
@@ -158,6 +174,75 @@ Substitute its placeholders. Remove the "[REPLACE WITH ACTUAL CONTENT]" markers 
 - Delete `GITIGNORE_OPTIONS/` directory
 - Delete `TEMPLATE_GUIDE.md` (template's own docs; new project doesn't need them — but ASK first; some users want to keep them as reference)
 - Delete `.claude/skills/init-project/` (its job is done — but ASK first; user might want to re-run for a sub-project)
+
+### 3.9.5 (Mode 2 only) Generate worktree-setup script
+
+If the user picked Mode 2 in question 6.5, generate `scripts/setup-worktrees.sh` with the per-lead worktree creation + junction setup commands populated for the chosen lead names. Include both Windows (mklink) and Unix (symlink) paths in commented branches.
+
+Script template:
+```bash
+#!/usr/bin/env bash
+# Sets up per-lead git worktrees with .project/ + .claude/ junctions.
+# Run AFTER /use-template has finished initial setup, from the main checkout.
+# Idempotent: safe to re-run; skips worktrees / junctions that already exist.
+
+set -euo pipefail
+
+PROJECT_NAME="<PROJECT_NAME>"
+PROJECT_DIR="$(pwd)"
+LEADS=(aria bram cleo)  # adjust to actual lead names from /use-template
+
+for lead in "${LEADS[@]}"; do
+  WORKTREE_PATH="../${PROJECT_NAME}-${lead}"
+  BRANCH="crt/${lead}-init"
+
+  if [[ -d "${WORKTREE_PATH}" ]]; then
+    echo "Worktree ${WORKTREE_PATH} already exists; skipping creation"
+  else
+    echo "Creating worktree at ${WORKTREE_PATH} on branch ${BRANCH}"
+    git worktree add "${WORKTREE_PATH}" -b "${BRANCH}"
+  fi
+
+  cd "${WORKTREE_PATH}"
+
+  # Junction .project/
+  if [[ ! -L .project ]] && [[ ! -d .project ]]; then
+    if [[ "$OS" == "Windows_NT" ]]; then
+      cmd //c "mklink /J .project ..\\${PROJECT_NAME}\\.project"
+    else
+      ln -s "../${PROJECT_NAME}/.project" .project
+    fi
+    echo "  ✓ junctioned .project/"
+  fi
+
+  # Junction .claude/
+  if [[ ! -L .claude ]] && [[ "$(ls -A .claude 2>/dev/null | wc -l)" -eq 0 ]]; then
+    rm -rf .claude
+    if [[ "$OS" == "Windows_NT" ]]; then
+      cmd //c "mklink /J .claude ..\\${PROJECT_NAME}\\.claude"
+    else
+      ln -s "../${PROJECT_NAME}/.claude" .claude
+    fi
+    echo "  ✓ junctioned .claude/"
+  fi
+
+  cd "${PROJECT_DIR}"
+done
+
+echo ""
+echo "Done. Each lead now has its own worktree:"
+git worktree list
+echo ""
+echo "Open Cursor in each worktree and run /aria, /bram, /cleo respectively."
+```
+
+Print after generation:
+```
+✓ scripts/setup-worktrees.sh generated
+✓ Run it now? (y/n) — or run later when you actually need parallel leads
+```
+
+If user picked Mode 1 or "Decide later," skip this step (Mode 2 setup is documented in WORKTREE_PATTERNS.md as the upgrade path).
 
 ### 3.10 First commit
 ```bash
@@ -216,7 +301,7 @@ Files now in your repo:
 - .gitignore (<flavor>)
 - .claude/agents/ (<count> personas active)
 - .claude/skills/ (<list active slash commands>)
-- .gauntlet/<slug>/ (coordination scaffolding)
+- .project/<slug>/ (coordination scaffolding)
 - CLAUDE_SESSION_HANDOFF.md (fill in as you do the first session)
 
 NEXT STEPS:

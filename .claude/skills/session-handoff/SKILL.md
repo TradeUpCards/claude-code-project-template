@@ -129,9 +129,9 @@ If this session was a NAMED LEAD session (not Tate's main session), write to the
 | Lead session | Write to |
 |---|---|
 | Tate | `./CLAUDE_SESSION_HANDOFF.md` (global; THIS skill's primary target) |
-| Aria | `.gauntlet/<slug>/handoffs/aria-handoff.md` |
-| Bram | `.gauntlet/<slug>/handoffs/bram-handoff.md` |
-| Cleo | `.gauntlet/<slug>/handoffs/cleo-handoff.md` |
+| Aria | `.project/<slug>/handoffs/aria-handoff.md` |
+| Bram | `.project/<slug>/handoffs/bram-handoff.md` |
+| Cleo | `.project/<slug>/handoffs/cleo-handoff.md` |
 
 Per-lead handoffs use a similar structure but scope is the lead's own workstream, not the global project state.
 
@@ -139,7 +139,7 @@ Per-lead handoffs use a similar structure but scope is the lead's own workstream
 
 ## Step 7 — Optional: write session summary
 
-If the session was substantive (>1 hr of work, or shipped meaningful artifacts), also write a session recap to `.gauntlet/<slug>/sessions/<YYYY-MM-DD>-<short-suffix>.md`. This is the long-form audit-trail version; the handoff file is the operational primer.
+If the session was substantive (>1 hr of work, or shipped meaningful artifacts), also write a session recap to `.project/<slug>/sessions/<YYYY-MM-DD>-<short-suffix>.md`. This is the long-form audit-trail version; the handoff file is the operational primer.
 
 Format: chronological narrative + decision rationale + what worked + what didn't + what to repeat.
 

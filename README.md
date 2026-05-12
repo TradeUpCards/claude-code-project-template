@@ -27,6 +27,16 @@ cursor .
 
 After init, `/tate` boots your team lead with a morning report.
 
+### Bootstrap user-level skills (one-time per machine)
+
+If this is a fresh machine without your usual user-level Claude Code skills, run the bootstrap script first:
+
+```bash
+scripts/install-recommended-skills.sh /path/to/your/skills-source
+```
+
+See `scripts/README.md` for details. The recommended skill set pairs naturally with this template's workflow (`presearch-interview`, `prd-checklist`, `engineering-interview`, `agent-review`, `ai-security-review`, etc.) — and they're auto-available in EVERY project (not just template-cloned ones) once installed at user level.
+
 ---
 
 ## What you get out of the box
@@ -65,8 +75,8 @@ These live at `~/.claude/skills/` and are available in EVERY project, including 
 | `prd-checklist` | Extract requirements from PRD (PDF/MD/TXT) → interactive HTML checklist with localStorage progress + filter buttons + hard-gate badges |
 
 ### Coordination scaffolding
-- **`.gauntlet/PROJECT/`** (renamed to `.gauntlet/<project-name>/` on init) — `in-flight.md` (workstream rules + file ownership map), `kickoff/` (per-lead boot prompts), `handoffs/` (per-lead handoff files), `sessions/` (per-session recaps), `coordination/` (cross-lead negotiation threads), `candidates/_candidates.md` (story-capture seed for `.gauntlet/<slug>/`)
-- **`.gauntlet/stories/`** — interview-story repository (used by `/story` skill); ships with `_template-design-defense.md`, `_template-star.md`, empty `_candidates.md`, and `README.md` index
+- **`.project/PROJECT/`** (renamed to `.project/<project-name>/` on init) — `in-flight.md` (workstream rules + file ownership map), `kickoff/` (per-lead boot prompts), `handoffs/` (per-lead handoff files), `sessions/` (per-session recaps), `coordination/` (cross-lead negotiation threads), `candidates/_candidates.md` (story-capture seed for `.project/<slug>/`)
+- **`.project/stories/`** — interview-story repository (used by `/story` skill); ships with `_template-design-defense.md`, `_template-star.md`, empty `_candidates.md`, and `README.md` index
 
 ### Repo-root primers
 - **`CLAUDE_SESSION_HANDOFF.md`** — fresh-Tate-session primer; refreshed at every session exit
@@ -97,9 +107,18 @@ See `TEMPLATE_GUIDE.md` for the full decision tree.
 
 ---
 
+## Version history
+
+- **v0.2.0** (current) — Breaking change: `.gauntlet/` renamed to `.project/` throughout the template (matches user-level `project-init` skill convention; AgentForge-style projects keep `.gauntlet/`). `/use-template` now prompts for worktree mode (Mode 1 single-checkout / Mode 2 per-lead worktrees). Added `WORKTREE_PATTERNS.md`, `scripts/install-recommended-skills.{sh,ps1}`, and `scripts/README.md`.
+- **v0.1.2** — Added `MEMORY_PATTERNS.md` and user-level `prd-checklist` skill reference.
+- **v0.1.1** — Ported `/story`, `/build-audit`, `/daily-sync` from AgentForge. Renamed `/init-project` → `/use-template` to avoid collision with user-level `project-init`.
+- **v0.1.0** — Initial release. Generic gauntlet-team-lead persona + 5 generic teammate types + 3 named-lead persona templates + `/use-template` + `/session-handoff` + LICENSE/gitignore choosers.
+
+---
+
 ## What's NOT in this template (yet)
 
-Tier 2 (could add in v0.2):
+Tier 2 (could add in v0.3):
 - `.pre-commit-config.yaml` templates (Python / Node)
 - `.gitlab-ci.yml` template
 - `pyproject.toml` / `package.json` templates
@@ -108,10 +127,14 @@ Tier 2 (could add in v0.2):
 
 Tier 3 (could add in v1.0):
 - ~~PRD-PDF → interactive HTML checklist extraction skill~~ — **shipped at user-level as `prd-checklist`** (v0.1.2)
+- ~~Worktree + junction setup pattern documented~~ — **shipped as `WORKTREE_PATTERNS.md`** (v0.2.0)
+- ~~Memory + session-summary discipline documented~~ — **shipped as `MEMORY_PATTERNS.md`** (v0.1.2)
+- ~~User-level skill bootstrap script~~ — **shipped as `scripts/install-recommended-skills.{sh,ps1}`** (v0.2.0)
 - Interactive HTML work-plan tracker generator
 - `THREAT_MODEL.md` template (security projects)
 - `RESPONSIBLE_USE.md` template (dual-use AI projects)
 - Multi-language scaffolds (Rust / Go)
+- `start_<lead>` / `finish_<lead>` shell launchers (W2 had these for worktree setup/teardown automation)
 
 If you want Tier 2 or Tier 3 ahead of those landing in the template, copy the relevant files from a project that has them (e.g., `ClinicalRedTeam` has Tier 3 examples).
 

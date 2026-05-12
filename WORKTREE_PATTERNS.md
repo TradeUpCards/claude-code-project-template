@@ -1,6 +1,6 @@
 # Worktree Patterns — When and How to Run Multi-Lead Work in Parallel
 
-When you have 2+ named leads (Aria/Bram/Cleo or custom-named) producing code on different branches at the same time, you have three workable patterns. This doc captures the trade-offs and the setup recipes — including the junction discipline for `.project/` (or `.gauntlet/`) and `.claude/` and the OneDrive mirroring for session summaries.
+When you have 2+ named leads (Aria/Bram/Cleo or custom-named) producing code on different branches at the same time, you have three workable patterns. This doc captures the trade-offs and the setup recipes — including the junction discipline for `.project/` (or `.gauntlet/` in AgentForge-style projects) and `.claude/` and the OneDrive mirroring for session summaries.
 
 ---
 
@@ -18,7 +18,7 @@ All leads work in the same physical folder (`<project-root>/`). Branches are cre
 **Pros:**
 - Zero setup
 - No junction discipline needed
-- `.project/` (or `.gauntlet/`) and `.claude/` are real directories — no broken symlinks
+- `.project/` (or `.gauntlet/` in AgentForge-style projects) and `.claude/` are real directories — no broken symlinks
 - Easy to switch leads in one terminal
 
 **Cons:**
@@ -179,7 +179,7 @@ git branch -d crt/aria-day1   # if merged
 
 ## Why junctions for `.project/` and `.claude/`
 
-### `.project/` (or `.gauntlet/`) is gitignored
+### `.project/` (or `.gauntlet/` in AgentForge-style projects) is gitignored
 
 The coordination directory holds work-in-progress handoffs, kickoff prompts, candidates, session summaries — all stuff that's local to your team's workflow and shouldn't ship to the public mirror. So the directory is in `.gitignore`.
 
@@ -305,7 +305,7 @@ Are 2+ leads doing sustained parallel code work (multi-day)?
 
 ## What this template ships with
 
-The template's `.gauntlet/PROJECT/in-flight.md.template` defaults to **Mode 1 (single checkout)** because most projects start there and only escalate if needed.
+The template's `.project/PROJECT/in-flight.md.template` defaults to **Mode 1 (single checkout)** because most projects start there and only escalate if needed.
 
 If you upgrade to Mode 2 or 3 mid-project (which ClinicalRedTeam did during Phase 1b), follow the recipe above and update `in-flight.md` to reflect the new mode + per-lead worktree paths.
 

@@ -4,7 +4,7 @@ description: Capture a moment from the build as a structured interview-ready sto
 config:
   # Override per project. The body derives all sibling files from STORIES_DIR
   # using fixed filenames (skill-internal convention, not configurable).
-  STORIES_DIR: .gauntlet/stories
+  STORIES_DIR: .project/stories
 ---
 
 # File-naming conventions inside `${STORIES_DIR}` (don't change these — they're internal to the skill)
