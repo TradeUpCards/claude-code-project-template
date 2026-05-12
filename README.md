@@ -77,6 +77,7 @@ These live at `~/.claude/skills/` and are available in EVERY project, including 
 ### Documentation
 - **`TEMPLATE_GUIDE.md`** — architecture of the template + Option A/B/C decision tree + when to use which pattern
 - **`MEMORY_PATTERNS.md`** — how Claude sessions persist knowledge across `/clear` boundaries (auto-memory, session handoffs, session summaries, lead handoffs, story candidates); the discipline loop; anti-patterns to avoid
+- **`WORKTREE_PATTERNS.md`** — when to use single-checkout vs per-lead worktrees; junction setup for `.project/` and `.claude/`; OneDrive mirroring discipline for session summaries / stories / memory; failure modes + recovery
 
 ---
 
