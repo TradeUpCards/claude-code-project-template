@@ -56,5 +56,13 @@ Icon?
 desktop.ini
 Thumbs.db
 
+# Local-only team coordination memory (NOT committed; mirrored to OneDrive)
+# Contains: lead kickoff prompts, per-lead handoffs, session summaries, story
+# candidates, cross-lead coordination threads, interview-story repo. None of
+# it ships to the public mirror or the partner's submission. See
+# WORKTREE_PATTERNS.md "OneDrive mirroring" section for the survivor-copy
+# pattern.
+/.project/
+
 # Project-specific
 # Uncomment / customize as needed
