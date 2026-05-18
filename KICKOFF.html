@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>New Project Kickoff — Foundation Only</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --ink: #e6e8ee;
+    --muted: #9aa3b2;
+    --accent: #7cd1ff;
+    --warn: #ffb86b;
+    --good: #8ce99a;
+    --rule: #2a3140;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Inter, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); }
+  body { line-height: 1.45; font-size: 20px; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 48px 32px 96px; }
+  h1 { font-size: 44px; line-height: 1.1; margin: 0 0 8px; letter-spacing: -0.01em; }
+  h2 { font-size: 30px; line-height: 1.2; margin: 56px 0 12px; letter-spacing: -0.005em; border-bottom: 1px solid var(--rule); padding-bottom: 10px; }
+  h3 { font-size: 22px; margin: 28px 0 8px; color: var(--accent); }
+  p, li { font-size: 20px; }
+  .lede { color: var(--muted); font-size: 22px; margin: 0 0 8px; }
+  .meta { color: var(--muted); font-size: 16px; margin-bottom: 32px; }
+  code { font-family: var(--mono); background: #1c2230; padding: 2px 6px; border-radius: 4px; font-size: 0.92em; color: #e6e8ee; }
+  pre {
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 18px 20px; overflow-x: auto; font-family: var(--mono); font-size: 17px; line-height: 1.5;
+  }
+  pre code { background: none; padding: 0; font-size: inherit; }
+  ul, ol { padding-left: 28px; }
+  li { margin-bottom: 8px; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 20px 24px; margin: 16px 0;
+  }
+  .step-num {
+    display: inline-block; min-width: 38px; height: 38px; line-height: 38px; text-align: center;
+    background: var(--accent); color: #0f1115; border-radius: 50%; font-weight: 700; margin-right: 12px;
+    font-size: 20px; vertical-align: middle;
+  }
+  .step-title { display: inline-block; vertical-align: middle; font-size: 28px; font-weight: 600; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 14px; font-weight: 600; }
+  .badge.good { background: rgba(140,233,154,0.15); color: var(--good); border: 1px solid rgba(140,233,154,0.35); }
+  .badge.warn { background: rgba(255,184,107,0.15); color: var(--warn); border: 1px solid rgba(255,184,107,0.35); }
+  .badge.muted { background: #1c2230; color: var(--muted); border: 1px solid var(--rule); }
+  .kvs { display: grid; grid-template-columns: 200px 1fr; gap: 10px 20px; margin: 16px 0; }
+  .kvs .k { color: var(--muted); font-size: 16px; }
+  .kvs .v { font-size: 18px; }
+  .callout {
+    border-left: 4px solid var(--accent); background: rgba(124,209,255,0.06);
+    padding: 14px 18px; margin: 20px 0; border-radius: 0 6px 6px 0;
+  }
+  .callout.warn { border-left-color: var(--warn); background: rgba(255,184,107,0.06); }
+  .callout strong { color: var(--ink); }
+  .small { font-size: 16px; color: var(--muted); }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 40px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 17px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .toc { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 24px; margin: 24px 0 40px; }
+  .toc ol { margin: 8px 0 0 24px; padding: 0; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>New Project Kickoff</h1>
+<p class="lede">Foundation only — local folders, repo, template clone, lead setup. Stops before presearch.</p>
+<p class="meta">Template version: <strong>v0.2.2</strong> &nbsp;·&nbsp; For: Week 4 hiring-partner project &nbsp;·&nbsp; Time budget: ~20 minutes</p>
+
+<div class="callout warn">
+<strong>"Partner project" = work for a real hiring partner.</strong> The deliverable goes to an external stakeholder who may have IP, license, NDA, security, or repo-hosting requirements that override the defaults below. <strong>Confirm Step 0 before you create anything.</strong>
+</div>
+
+<h2 id="step0" style="margin-top: 24px;"><span class="step-num">0</span><span class="step-title">Confirm with the hiring partner (before any repo creation)</span></h2>
+
+<div class="panel">
+<table>
+  <tr><th>Question</th><th>Default if partner has no preference</th></tr>
+  <tr><td>Repo hosting — do they want code in their GitHub/GitLab/Bitbucket?</td><td>Cohort GitLab (<code>labs.gauntletai.com/coryvandenberg</code>)</td></tr>
+  <tr><td>License — proprietary, MIT, Apache, or partner-specified?</td><td><strong>Proprietary</strong> (use template's <code>LICENSE_OPTIONS/proprietary.txt</code>)</td></tr>
+  <tr><td>Is a personal GitHub backup mirror acceptable?</td><td>If unclear — <strong>skip the mirror</strong>. Single-remote GitLab only.</td></tr>
+  <tr><td>Is OneDrive (your personal cloud) acceptable backup for local-only artifacts (lead handoffs, session summaries, story candidates — none of which are in the repo)?</td><td>If unclear — <strong>skip the OneDrive mirror</strong>; accept the survivor-copy gap, or point the mirror at a partner-approved location.</td></tr>
+  <tr><td>NDA / confidentiality — any data or credentials that can't appear in commits, even on the private GitLab repo?</td><td>Treat the whole project as confidential; no PHI / no secrets / no partner identifiers in commits</td></tr>
+  <tr><td>Submission expectation to Gauntlet — full repo, sanitized demo, or video only?</td><td>Same as MVP/Final cadence (PRD-tracked deliverable)</td></tr>
+  <tr><td>Who reviews / signs off — partner contact, Gauntlet grader, both?</td><td>Cohort grader only until confirmed otherwise</td></tr>
+</table>
+</div>
+
+<p class="small">If the partner's answers shift any default below (especially the mirror question), edit the relevant step before running it.</p>
+
+<hr/>
+
+<div class="toc">
+  <strong>Steps:</strong>
+  <ol>
+    <li><a href="#prereqs">Verify prereqs (1 min)</a></li>
+    <li><a href="#gitlab">Create GitLab repo (submission target) + clone template (5 min)</a></li>
+    <li><a href="#dualpush">Wire dual-push: GitLab primary + GitHub backup (2 min)</a></li>
+    <li><a href="#local">Open in Cursor (1 min)</a></li>
+    <li><a href="#bootstrap">Bootstrap user-level skills (skip if already done)</a></li>
+    <li><a href="#init">Run <code>/use-template</code> — interactive setup (10 min)</a></li>
+    <li><a href="#tate">Boot Tate, get morning report (1 min)</a></li>
+    <li><a href="#next">What's next — presearch starts here</a></li>
+  </ol>
+</div>
+
+<hr/>
+
+<!-- STEP 1 -->
+<h2 id="prereqs"><span class="step-num">1</span><span class="step-title">Verify prereqs</span></h2>
+
+<div class="panel">
+<div class="kvs">
+  <div class="k">git</div><div class="v"><code>git --version</code> &nbsp; <span class="badge good">have it</span></div>
+  <div class="k">glab CLI</div><div class="v"><code>glab --version</code> &nbsp; <span class="badge good">primary</span> — GitLab is the submission/CI repo for all Gauntlet work</div>
+  <div class="k">gh CLI</div><div class="v"><code>gh --version</code> &nbsp; <span class="badge muted">backup mirror only</span> — used to create the GitHub backup repo</div>
+  <div class="k">Cursor</div><div class="v">Open from terminal with <code>cursor .</code></div>
+  <div class="k">Claude Code</div><div class="v">Logged in, sonnet 4.6 or 4.7 model selected</div>
+</div>
+</div>
+
+<div class="callout warn">
+<strong>Repo posture (Gauntlet standard).</strong> GitLab at <code>labs.gauntletai.com/coryvandenberg</code> is the <strong>source of truth</strong> — that's what the cohort grades against and where the CI gate runs. GitHub at <code>github.com/TradeUpCards</code> is a <strong>personal backup mirror only</strong>. The <code>origin</code> remote is configured for dual-push so one <code>git push origin</code> updates both. <strong>Never dual-merge via two UIs</strong> — merge MRs on GitLab only, then push to mirror GitHub.
+</div>
+
+<hr/>
+
+<!-- STEP 2 -->
+<h2 id="gitlab"><span class="step-num">2</span><span class="step-title">Create GitLab repo (submission target) + clone template</span></h2>
+
+<p>GitLab is the primary repo for Gauntlet submission and CI. GitHub's "Use this template" button would create the project under GitHub's namespace — wrong primary. Instead: clone the template's working tree, re-init pointing at GitLab, push.</p>
+
+<h3>2a — Create the empty GitLab repo</h3>
+<pre><code>glab repo create coryvandenberg/&lt;new-project-name&gt; \
+  --private \
+  --description "&lt;one-line description&gt;"</code></pre>
+
+<p class="small">Or via web UI: <a href="https://labs.gauntletai.com/projects/new" style="color:var(--accent)">labs.gauntletai.com/projects/new</a> &nbsp;·&nbsp; namespace <code>coryvandenberg</code>, private, no README, no .gitignore, no license (the template provides those).</p>
+
+<h3>2b — Pull the template's working tree (no template git history)</h3>
+<pre><code>cd C:/Dev/GauntletAI/
+git clone --depth=1 --branch v0.2.2 \
+  https://github.com/TradeUpCards/claude-code-project-template.git \
+  &lt;new-project-name&gt;
+cd &lt;new-project-name&gt;
+rm -rf .git
+git init -b main</code></pre>
+
+<div class="callout warn">
+<strong>Why <code>--depth=1 --branch v0.2.2</code> + delete <code>.git</code>.</strong> Pins to the v0.2.2 tag so template churn on <code>main</code> won't surprise your build. Deleting <code>.git</code> drops the template's commit history so your new project starts with one clean commit, not the template's commits.
+</div>
+
+<hr/>
+
+<!-- STEP 3 -->
+<h2 id="dualpush"><span class="step-num">3</span><span class="step-title">Wire dual-push: GitLab primary + GitHub backup <span class="badge warn">conditional</span></span></h2>
+
+<div class="callout warn">
+<strong>Skip this step if the hiring partner hasn't explicitly OK'd a personal-account backup mirror.</strong> For hiring-partner work, mirroring confidential code to a personal GitHub — even private — can violate NDA or IP terms. Default for partner work is <strong>GitLab single-remote</strong>. Just run: <code>git remote add origin https://labs.gauntletai.com/coryvandenberg/&lt;name&gt;.git</code> and skip to Step 4.
+</div>
+
+<p>If the partner OK'd the backup mirror (or there's no NDA): this is the pattern from <code>AgentForge-tate</code> — one <code>origin</code> remote that pushes to both. Fetch from GitLab only; push updates both.</p>
+
+<h3>3a — Optional but recommended: create the GitHub backup repo</h3>
+<pre><code>gh repo create TradeUpCards/&lt;new-project-name&gt; \
+  --private \
+  --description "Backup mirror of GitLab &lt;new-project-name&gt;"</code></pre>
+
+<h3>3b — Configure dual-push origin</h3>
+<pre><code># Add GitLab as fetch + first push target
+git remote add origin https://labs.gauntletai.com/coryvandenberg/&lt;new-project-name&gt;.git
+
+# Add GitHub as a SECOND push URL on the same origin remote
+git remote set-url --add --push origin https://labs.gauntletai.com/coryvandenberg/&lt;new-project-name&gt;.git
+git remote set-url --add --push origin https://github.com/TradeUpCards/&lt;new-project-name&gt;.git
+
+# Verify — should show 1 fetch, 2 push URLs
+git remote -v</code></pre>
+
+<p>Expected output:</p>
+<pre><code>origin  https://labs.gauntletai.com/coryvandenberg/&lt;name&gt;.git  (fetch)
+origin  https://labs.gauntletai.com/coryvandenberg/&lt;name&gt;.git  (push)
+origin  https://github.com/TradeUpCards/&lt;name&gt;.git              (push)</code></pre>
+
+<div class="callout warn">
+<strong>Workflow rule (from <code>AgentForge-tate</code> memory).</strong> Merge MRs on GitLab only, then run <code>git push origin</code> locally to update both. Never accept a PR on GitHub — that creates permanent SHA divergence between the two repos. If you forget and the GitHub mirror drifts, recover with: <code>git fetch origin master && git push origin refs/remotes/origin/master:refs/heads/master</code>
+</div>
+
+<hr/>
+
+<!-- STEP 4 (was 3) -->
+<h2 id="local"><span class="step-num">4</span><span class="step-title">Open in Cursor</span></h2>
+
+<pre><code>cursor .</code></pre>
+
+<p>Open a terminal inside Cursor and start Claude Code. <strong>Don't commit yet</strong> — <code>/use-template</code> in the next step makes the first commit after it renames placeholders.</p>
+
+<hr/>
+
+<!-- STEP 5 -->
+<h2 id="bootstrap"><span class="step-num">5</span><span class="step-title">Bootstrap user-level skills <span class="badge muted">one-time per machine</span></span></h2>
+
+<p>You've already done this on this machine — Foosaner skills (<code>presearch-interview</code>, <code>prd-checklist</code>, <code>engineering-interview</code>, <code>agent-review</code>, <code>ai-security-review</code>, <code>llm-observability-review</code>, <code>synthetic-data-plan</code>, <code>weekly-prd</code>, <code>frontend-skill</code>, <code>langfuse</code>) are at <code>~/.claude/skills/</code> and auto-available in every project. <strong>Skip this step.</strong></p>
+
+<p class="small">If you ever set up a fresh machine: <code>scripts/install-recommended-skills.sh /path/to/skills-source</code></p>
+
+<hr/>
+
+<!-- STEP 6 -->
+<h2 id="init"><span class="step-num">6</span><span class="step-title">Run <code>/use-template</code> — the interactive setup</span></h2>
+
+<p>This is where the template becomes <em>your</em> project. Answer the prompts; the skill fills placeholders, renames files, removes unused options, and makes the first commit.</p>
+
+<h3>Questions it will ask</h3>
+<table>
+  <tr><th>Prompt</th><th>For partner project, answer:</th></tr>
+  <tr><td>Project name</td><td>e.g. <code>PartnerProject</code> (PascalCase ok — slugged automatically)</td></tr>
+  <tr><td>1–3 sentence description</td><td>Short, future-you needs this in <code>CLAUDE.md</code></td></tr>
+  <tr><td>License</td><td><strong>Proprietary</strong> by default for hiring-partner work — unless the partner explicitly OKs open source</td></tr>
+  <tr><td>Gitignore flavor</td><td><strong>Python</strong> or <strong>Node</strong> — pick the primary stack</td></tr>
+  <tr><td>Default branch</td><td><code>main</code></td></tr>
+  <tr><td>Option A / B / C</td><td><strong>Option C (named leads)</strong> — see below</td></tr>
+  <tr><td>Lead names</td><td>Keep <code>Aria / Bram / Cleo</code> unless partner wants their own</td></tr>
+  <tr><td>Per-lead workstreams</td><td>Defer if not yet scoped — can be re-edited later</td></tr>
+  <tr><td>MVP deadline</td><td>Tuesday cohort default</td></tr>
+  <tr><td>Final deadline</td><td>Friday/Sunday cohort default</td></tr>
+  <tr><td>Target URL</td><td>If integration/security project — skip otherwise</td></tr>
+</table>
+
+<div class="callout">
+<strong>Why Option C for a hiring-partner project.</strong> Real external deliverable + multi-day build + plausible parallel workstreams (e.g. agent + UI + evals) + persistent lead identity across sessions makes <code>/aria</code> / <code>/bram</code> / <code>/cleo</code> dispatch worth the setup. Upgrade from B → C later is 2–3 hrs; starting at C costs nothing extra now.
+</div>
+
+<h3>What it produces</h3>
+<ul>
+  <li><code>CLAUDE.md</code> — project-level instructions Claude reads on every session</li>
+  <li><code>CLAUDE_SESSION_HANDOFF.md</code> — primer for fresh Tate sessions</li>
+  <li><code>.claude/agents/</code> — gauntlet-team-lead + 5 generic teammates + aria/bram/cleo personas</li>
+  <li><code>.claude/skills/</code> — <code>/tate</code>, <code>/aria</code>, <code>/bram</code>, <code>/cleo</code>, <code>/session-handoff</code>, <code>/story</code>, <code>/build-audit</code>, <code>/daily-sync</code></li>
+  <li><code>.project/&lt;slug&gt;/</code> — <code>in-flight.md</code> (file-ownership map), <code>kickoff/</code>, <code>handoffs/</code>, <code>sessions/</code>, <code>coordination/</code>, <code>candidates/</code></li>
+  <li><code>.project/stories/</code> — interview-story repo with templates + index</li>
+  <li>First commit: <code>chore: init &lt;project&gt; from claude-code-project-template</code></li>
+</ul>
+
+<hr/>
+
+<!-- STEP 7 -->
+<h2 id="tate"><span class="step-num">7</span><span class="step-title">Boot Tate, get morning report</span></h2>
+
+<pre><code>/tate</code></pre>
+
+<p>Tate reads the (still-mostly-empty) <code>CLAUDE_SESSION_HANDOFF.md</code> + any lead handoffs and gives you a 4-line morning report covering: timeline, eval state, lead status, recommendation. On day 0 the recommendation will be: <strong>run presearch</strong>.</p>
+
+<hr/>
+
+<!-- STEP 8 -->
+<h2 id="next"><span class="step-num">8</span><span class="step-title">What's next — presearch starts here</span></h2>
+
+<p>Foundation is done. From here, the actual project work begins. In order:</p>
+
+<div class="panel">
+<table>
+  <tr><th>Order</th><th>Skill</th><th>Why</th></tr>
+  <tr>
+    <td>1</td>
+    <td><code>/presearch-interview</code></td>
+    <td>Multi-turn discovery → produces <code>ARCHITECTURE.md</code>. If the partner gave you a brief, paste it in early so the interview anchors there instead of starting from zero.</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><code>/prd-checklist</code> (if partner supplied a PRD / spec)<br/>OR<br/><code>/weekly-prd</code> (if they didn't)</td>
+    <td>Either extracts the partner's PRD into an interactive HTML checklist at <code>docs/PRD-REQUIREMENTS.html</code> (per-requirement status, hard-gate badges, localStorage), OR generates a Week 4-scoped PRD from the presearch output.</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Edit <code>.project/&lt;slug&gt;/in-flight.md</code></td>
+    <td>Fill in file-ownership rows for Aria/Bram/Cleo based on what presearch + PRD revealed. This is the rule the team lead enforces.</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Edit per-lead kickoff files in <code>.project/&lt;slug&gt;/kickoff/</code></td>
+    <td>Each lead's "what you own + what you don't" brief. Loaded when you run <code>/aria</code> / <code>/bram</code> / <code>/cleo</code>.</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><code>/session-handoff</code> before <code>/clear</code></td>
+    <td>Hard rule. Don't end a session without it.</td>
+  </tr>
+</table>
+</div>
+
+<div class="callout">
+<strong>Hiring-partner project specific.</strong> The partner is the <em>customer</em>, not a teammate — they don't have commit rights or sit in Cursor with you. The decisions that shape <code>in-flight.md</code> are: which workstreams map to which lead, and which sessions can run in parallel without same-file collisions. Use the partner's PRD / spec to anchor lead workstreams; if the partner hasn't issued one, <code>/presearch-interview</code> + <code>/weekly-prd</code> in Step 8 fills that gap.
+</div>
+
+<div class="callout">
+<strong>Where <code>.project/</code> lives (it's not in the repo).</strong> The <code>.project/</code> directory — kickoff prompts, lead handoffs, session summaries, story candidates, coordination threads — is <strong>gitignored by default</strong> in this template (verified in all three gitignore options). It's local-only, mirrored to OneDrive as the survivor copy. It never ships to GitLab, never ships to a partner submission, never appears in commit history. So partner-confidentiality concerns about commit history don't apply to <code>.project/</code> — the only question is whether your <strong>OneDrive personal cloud</strong> is acceptable backup storage for partner work artifacts. If unclear, point the OneDrive mirror at a partner-approved location instead (or skip mirroring entirely and accept the survivor-copy gap).
+</div>
+
+<hr/>
+
+<h2 style="border:none; margin-top: 40px;">Quick reference card</h2>
+
+<div class="panel">
+<pre><code># Setup (one-time, per project)
+glab repo create coryvandenberg/&lt;name&gt; --private --description "..."
+gh   repo create TradeUpCards/&lt;name&gt;    --private --description "Backup mirror"
+
+cd C:/Dev/GauntletAI/
+git clone --depth=1 --branch v0.2.1 \
+  https://github.com/TradeUpCards/claude-code-project-template.git &lt;name&gt;
+cd &lt;name&gt; && rm -rf .git && git init -b main
+
+git remote add origin https://labs.gauntletai.com/coryvandenberg/&lt;name&gt;.git
+git remote set-url --add --push origin https://labs.gauntletai.com/coryvandenberg/&lt;name&gt;.git
+git remote set-url --add --push origin https://github.com/TradeUpCards/&lt;name&gt;.git
+
+cursor .
+# In Cursor terminal:
+/use-template      # interactive setup + first commit
+git push -u origin main   # pushes to BOTH GitLab + GitHub
+/tate
+
+# Day-to-day
+/tate              # morning report
+/aria /bram /cleo  # dispatch leads (separate terminals or background)
+/daily-sync        # multi-lead status
+/story             # capture an interview moment
+/session-handoff   # before /clear, every time
+
+# MR workflow (GitLab is the source of truth)
+git push -u origin feature/&lt;branch&gt; \
+  -o merge_request.create \
+  -o merge_request.target=main \
+  -o merge_request.remove_source_branch=true
+# Merge MR on GitLab UI, then locally:
+git checkout main && git pull && git push origin   # mirrors to GitHub
+
+# Reviews (on demand)
+/build-audit
+/agent-review
+/ai-security-review
+/llm-observability-review
+/engineering-interview</code></pre>
+</div>
+
+<p class="small" style="margin-top: 40px;">Template repo: <a href="https://github.com/TradeUpCards/claude-code-project-template" style="color:var(--accent)">github.com/TradeUpCards/claude-code-project-template</a> &nbsp;·&nbsp; Tag pinned: v0.2.1 &nbsp;·&nbsp; Doc generated 2026-05-18</p>
+
+</div>
+</body>
+</html>
