@@ -85,7 +85,7 @@
 <div class="panel">
 <table>
   <tr><th>Question</th><th>Default if partner has no preference</th></tr>
-  <tr><td>Repo hosting — do they want code in their GitHub/GitLab/Bitbucket?</td><td>Cohort GitLab (<code>labs.gauntletai.com/coryvandenberg</code>)</td></tr>
+  <tr><td>Repo hosting — do they want code in their GitHub/GitLab/Bitbucket?</td><td>Cohort GitLab (<code>labs.gauntletai.com/coryvandenberg</code>) at <strong>internal</strong> visibility — required so graders can see without being added</td></tr>
   <tr><td>License — proprietary, MIT, Apache, or partner-specified?</td><td><strong>Proprietary</strong> (use template's <code>LICENSE_OPTIONS/proprietary.txt</code>)</td></tr>
   <tr><td>Is a personal GitHub backup mirror acceptable?</td><td>If unclear — <strong>skip the mirror</strong>. Single-remote GitLab only.</td></tr>
   <tr><td>Is OneDrive (your personal cloud) acceptable backup for local-only artifacts (lead handoffs, session summaries, story candidates — none of which are in the repo)?</td><td>If unclear — <strong>skip the OneDrive mirror</strong>; accept the survivor-copy gap, or point the mirror at a partner-approved location.</td></tr>
@@ -141,10 +141,14 @@
 
 <h3>2a — Create the empty GitLab repo</h3>
 <pre><code>glab repo create coryvandenberg/&lt;new-project-name&gt; \
-  --private \
+  --internal \
   --description "&lt;one-line description&gt;"</code></pre>
 
-<p class="small">Or via web UI: <a href="https://labs.gauntletai.com/projects/new" style="color:var(--accent)">labs.gauntletai.com/projects/new</a> &nbsp;·&nbsp; namespace <code>coryvandenberg</code>, private, no README, no .gitignore, no license (the template provides those).</p>
+<p class="small">Or via web UI: <a href="https://labs.gauntletai.com/projects/new" style="color:var(--accent)">labs.gauntletai.com/projects/new</a> &nbsp;·&nbsp; namespace <code>coryvandenberg</code>, <strong>internal</strong> visibility, no README, no .gitignore, no license (the template provides those).</p>
+
+<div class="callout warn">
+<strong>Why <code>--internal</strong>, not <code>--private</code>.</strong> Gauntlet cohort standard: graders need to see the repo without being added as members. "Internal" = visible to anyone authenticated to <code>labs.gauntletai.com</code> (cohort + staff). <strong>Private</strong> would block graders. <strong>Public</strong> exposes hiring-partner work to the open internet. If the partner has confidentiality concerns even within the cohort, escalate before creating the repo — the resolution is usually a separate partner-controlled repo, not a private cohort repo.
+</div>
 
 <h3>2b — Pull the template's working tree (no template git history)</h3>
 <pre><code>cd C:/Dev/GauntletAI/
@@ -312,11 +316,11 @@ origin  https://github.com/TradeUpCards/&lt;name&gt;.git              (push)</co
 
 <div class="panel">
 <pre><code># Setup (one-time, per project)
-glab repo create coryvandenberg/&lt;name&gt; --private --description "..."
-gh   repo create TradeUpCards/&lt;name&gt;    --private --description "Backup mirror"
+glab repo create coryvandenberg/&lt;name&gt; --internal --description "..."   # internal = cohort-visible
+gh   repo create TradeUpCards/&lt;name&gt;    --private  --description "Backup mirror"
 
 cd C:/Dev/GauntletAI/
-git clone --depth=1 --branch v0.2.1 \
+git clone --depth=1 --branch v0.2.2 \
   https://github.com/TradeUpCards/claude-code-project-template.git &lt;name&gt;
 cd &lt;name&gt; && rm -rf .git && git init -b main
 
@@ -353,7 +357,7 @@ git checkout main && git pull && git push origin   # mirrors to GitHub
 /engineering-interview</code></pre>
 </div>
 
-<p class="small" style="margin-top: 40px;">Template repo: <a href="https://github.com/TradeUpCards/claude-code-project-template" style="color:var(--accent)">github.com/TradeUpCards/claude-code-project-template</a> &nbsp;·&nbsp; Tag pinned: v0.2.1 &nbsp;·&nbsp; Doc generated 2026-05-18</p>
+<p class="small" style="margin-top: 40px;">Template repo: <a href="https://github.com/TradeUpCards/claude-code-project-template" style="color:var(--accent)">github.com/TradeUpCards/claude-code-project-template</a> &nbsp;·&nbsp; Tag pinned: v0.2.2 &nbsp;·&nbsp; Doc generated 2026-05-18</p>
 
 </div>
 </body>
