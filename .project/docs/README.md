@@ -18,9 +18,13 @@ a cohort submission repo.
 │                     event contracts between leads. (Or for non-education projects:
 │                     workplan, architecture sketches, ADR drafts.)
 ├── research/         Playtest notes, prior-art references, screenshots, links
-└── demo/             Demo plan, video script, deliverable-specific docs (iPad
-                      roadmap, screen recordings, etc.) — the things you ship at
-                      the end of the sprint.
+├── demo/             Demo plan, video script, deliverable-specific docs (iPad
+│                     roadmap, screen recordings, etc.) — the things you ship at
+│                     the end of the sprint.
+└── references/       Cross-project reference docs that ship with every new
+                      project from this template (e.g., Presearch.pdf for the
+                      Gauntlet pre-coding discovery process). Don't edit; these
+                      are the shared playbook every project should have.
 ```
 
 ## What lives where
@@ -40,6 +44,18 @@ Notes from playing reference products, reading prior art, screenshots, links.
 ### `demo/`
 Fri-noon (or whenever-shipping) deliverables. Owned by whichever lead handles
 deploy + demo prep. Demo video script, iPad roadmap, deliverable-specific docs.
+
+### `references/`
+Cross-project reference material that ships with **every** new project from
+this template. Currently:
+- `Presearch.pdf` — Gauntlet pre-coding discovery / project-defense framework.
+  Read this before starting any new cohort project; it scopes what to ask
+  yourself before you write code (problem framing, architecture, evals,
+  verification, security, deployment, tradeoffs, rationale). The user-level
+  `presearch-interview` skill is the conversational version of this doc.
+
+Add to this folder when you find documents you want every future cohort
+project to start with as default reading.
 
 ## Reading order for a new session
 
