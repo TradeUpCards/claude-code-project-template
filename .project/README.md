@@ -1,11 +1,11 @@
-# `.project/{{PROJECT_SLUG}}/` — Coordination & Session Memory
+# `.project/` — Coordination & Session Memory
 
 This directory holds **coordination artifacts that don't belong in the main repo** but need to persist across Claude Code sessions for {{PROJECT_NAME}}.
 
 ## Layout
 
 ```
-.project/{{PROJECT_SLUG}}/
+.project/
 ├── README.md             ← this file
 ├── in-flight.md          ← workstream rules + file ownership map (Option B/C)
 ├── kickoff/              ← per-lead boot prompts
@@ -33,7 +33,7 @@ This directory holds **coordination artifacts that don't belong in the main repo
 
 - Code → project's source tree (e.g., `src/`)
 - Tests → `tests/`
-- Project docs (PRD source, lesson sketches, demo plans, video scripts) → `.project/{{PROJECT_SLUG}}/docs/` (local-only / OneDrive, NOT committed). Code-level docs (README, ARCHITECTURE) stay at repo root.
+- Project docs (PRD source, lesson sketches, demo plans, video scripts) → `.project/docs/` (local-only / OneDrive, NOT committed). Code-level docs (README, ARCHITECTURE) stay at repo root.
 - Lead persona definitions → `.claude/agents/`
 - Slash command skills → `.claude/skills/`
 - Tate-to-Tate handoff → `CLAUDE_SESSION_HANDOFF.md` at repo root (NOT here)

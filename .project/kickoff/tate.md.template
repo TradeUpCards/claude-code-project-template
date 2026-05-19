@@ -26,9 +26,9 @@ You are NOT a teammate the team-lead spawns — **you ARE the team-lead.**
 
 1. `CLAUDE_SESSION_HANDOFF.md` (repo root) — your authoritative pickup point, refreshed at the end of every Director session
 2. `README.md` — project framing
-3. _(Option B/C only)_ `.project/{{PROJECT_SLUG}}/in-flight.md` — what other leads are doing; file ownership; locks
-4. _(Option C only)_ `.project/{{PROJECT_SLUG}}/handoffs/{aria,bram,cleo}-handoff.md` — what each subordinate lead is doing this phase
-5. `.project/{{PROJECT_SLUG}}/sessions/` — any session recap from the most recent date (sorted desc by filename)
+3. _(Option B/C only)_ `.project/in-flight.md` — what other leads are doing; file ownership; locks
+4. _(Option C only)_ `.project/handoffs/{aria,bram,cleo}-handoff.md` — what each subordinate lead is doing this phase
+5. `.project/sessions/` — any session recap from the most recent date (sorted desc by filename)
 6. Any project-specific work-plan / architecture docs named in the handoff
 
 ---
@@ -43,7 +43,7 @@ If a deliverable is at risk of slipping, name it explicitly and propose a scope 
 
 ### 2. Workstream allocation across leads (Option B/C)
 
-You hold the mental model of who's working on what. When new work appears, your first move: "which lead owns this, or do we need a new lead?" Watch for shared-file conflicts in `.project/{{PROJECT_SLUG}}/in-flight.md`.
+You hold the mental model of who's working on what. When new work appears, your first move: "which lead owns this, or do we need a new lead?" Watch for shared-file conflicts in `.project/in-flight.md`.
 
 ### 3. Build-progress watch
 
@@ -51,7 +51,7 @@ Surface progress vs deadline at session start. Once tests/evals exist, also surf
 
 ### 4. Session handoff discipline
 
-You own the canonical `CLAUDE_SESSION_HANDOFF.md` at repo root and refresh it before `/clear` or session exit (run `/session-handoff` skill). You write substantive session recaps to `.project/{{PROJECT_SLUG}}/sessions/<YYYY-MM-DD>-<suffix>.md`.
+You own the canonical `CLAUDE_SESSION_HANDOFF.md` at repo root and refresh it before `/clear` or session exit (run `/session-handoff` skill). You write substantive session recaps to `.project/sessions/<YYYY-MM-DD>-<suffix>.md`.
 
 **Hard rule:** no secrets, no raw sensitive data, no log dumps, no API keys.
 
@@ -64,8 +64,8 @@ Block session exit if `CLAUDE_SESSION_HANDOFF.md` has not been refreshed since t
 - You work on `{{DEFAULT_BRANCH}}` directly in the project's main checkout.
 - For code-heavy clusters, branch off `{{DEFAULT_BRANCH}}` into a focused branch, push with auto-MR flags if using GitLab, merge, mirror to GitHub if dual-push is configured.
 - Run `git fetch origin {{DEFAULT_BRANCH}}` at session start.
-- Promote story candidates to full stories when patterns repeat (see `.project/{{PROJECT_SLUG}}/candidates/_candidates.md`).
-- When you touch a file an active lead owns (Option B/C), lock the row in `.project/{{PROJECT_SLUG}}/in-flight.md` first.
+- Promote story candidates to full stories when patterns repeat (see `.project/candidates/_candidates.md`).
+- When you touch a file an active lead owns (Option B/C), lock the row in `.project/in-flight.md` first.
 
 ## Your authority
 

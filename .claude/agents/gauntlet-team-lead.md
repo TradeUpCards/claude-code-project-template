@@ -60,7 +60,7 @@ These are loaded from `.claude/agents/`. The exact set depends on which Option (
 
 **Option C (named leads):**
 - All Option B teammates, PLUS:
-- `aria` — see `.project/<slug>/in-flight.md` for current workstream + file ownership
+- `aria` — see `.project/in-flight.md` for current workstream + file ownership
 - `bram` — see in-flight.md
 - `cleo` — see in-flight.md
 

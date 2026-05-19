@@ -3,7 +3,7 @@
 Single source of truth for everything Tate, the leads, and a future grader
 need to find quickly. Keep it shallow — these are sprint docs, not a manual.
 
-**This directory lives under `.project/{{PROJECT_SLUG}}/`, which is gitignored.**
+**This directory lives under `.project/`, which is gitignored.**
 That means everything in here is **local-only and OneDrive-mirrored**, never
 committed to GitLab / GitHub. PRD source material, paper sketches, and demo
 materials are coordination artifacts — they don't belong in a public mirror or
@@ -12,7 +12,7 @@ a cohort submission repo.
 ## Layout
 
 ```
-.project/{{PROJECT_SLUG}}/docs/
+.project/docs/
 ├── prd/              PRD source documents (PDFs, original-language specs, etc.)
 ├── lesson-design/    Paper-before-pixels sketches, dialogue scripts, lesson flow,
 │                     event contracts between leads. (Or for non-education projects:
@@ -45,9 +45,9 @@ deploy + demo prep. Demo video script, iPad roadmap, deliverable-specific docs.
 
 If you're Tate at session start:
 1. `CLAUDE_SESSION_HANDOFF.md` (repo root) — your pickup point
-2. `.project/{{PROJECT_SLUG}}/docs/prd/` — source spec
-3. `.project/{{PROJECT_SLUG}}/docs/lesson-design/` — what the team has decided
-4. `.project/{{PROJECT_SLUG}}/in-flight.md` — coordination state
+2. `.project/docs/prd/` — source spec
+3. `.project/docs/lesson-design/` — what the team has decided
+4. `.project/in-flight.md` — coordination state
 
 If you're Aria/Bram/Cleo, read your kickoff at
-`.project/{{PROJECT_SLUG}}/kickoff/<name>.md` first; it'll point you here.
+`.project/kickoff/<name>.md` first; it'll point you here.

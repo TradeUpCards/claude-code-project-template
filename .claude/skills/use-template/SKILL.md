@@ -1,6 +1,6 @@
 ---
 name: use-template
-description: Interactive walkthrough to finish setting up a new project after cloning from claude-code-project-template. Asks the user about project name, license, gitignore flavor, lead-setup option (A/B/C), deadlines, and target URL. Then fills placeholders, renames PROJECT/ to project slug, removes unused option files, makes the first commit, and optionally creates a GitHub/GitLab repo. Run this FIRST after cloning the template. Distinct from the user-level `project-init` skill (general-purpose project bootstrap) and `agent-team-setup` (multi-agent workflow installer for ANY existing project).
+description: Interactive walkthrough to finish setting up a new project after cloning from claude-code-project-template. Asks the user about project name, license, gitignore flavor, lead-setup option (A/B/C), deadlines, and target URL. Then fills placeholders, removes unused option files, makes the first commit, and optionally creates a GitHub/GitLab repo. Run this FIRST after cloning the template. Distinct from the user-level `project-init` skill (general-purpose project bootstrap) and `agent-team-setup` (multi-agent workflow installer for ANY existing project).
 ---
 
 You are running the project initialization walkthrough for a new Claude Code project built from `claude-code-project-template`.
@@ -15,7 +15,9 @@ Turn the placeholder-filled template into a fully customized, ready-to-use proje
 
 **`.project/` and `.claude/` are NEVER committed to git.** They hold local-only coordination state — kickoffs, handoffs, agent personas, slash-command skills, PRD source docs, lesson sketches, demo plans — which lives in OneDrive/iCloud sync, not in the cohort-visible repo. Do NOT ask the user whether to commit them. Do NOT remove the `/.project/` or `/.claude/` entries from the chosen gitignore. If you find them tracked after the first commit, that's a bug — fix it before phase 4.
 
-**Project docs go under `.project/<slug>/docs/`, not at repo root.** The template ships an empty `docs/{prd,lesson-design,research,demo}/` scaffold under `.project/PROJECT/`. After the rename in Phase 3.4 it becomes `.project/<slug>/docs/`. The user drops PRD PDFs and lesson sketches there. Code-level docs (README.md, ARCHITECTURE.md) still live at repo root.
+**Project docs go under `.project/docs/`, not at repo root.** The template ships an empty `docs/{prd,lesson-design,research,demo}/` scaffold directly under `.project/`. The user drops PRD PDFs and lesson sketches there. Code-level docs (README.md, ARCHITECTURE.md) still live at repo root.
+
+**`.project/` is FLAT — no project-slug subnamespace.** Earlier versions of this template nested everything under `.project/<slug>/...` to support multiple projects sharing one `.project/` mount. That was overengineering for a single-project template — one repo = one project = flat `.project/` layout. The slug is still used for GitHub/GitLab repo names, but NOT as a directory level inside `.project/`.
 
 ---
 
@@ -144,24 +146,24 @@ Find every `.template` file. For each:
 3. Write back to the file's path WITHOUT the `.template` extension
 4. Delete the original `.template` file
 
-### 3.4 Rename PROJECT/ directory
-Rename `.project/PROJECT/` to `.project/<PROJECT_SLUG>/`. This brings the empty `docs/{prd,lesson-design,research,demo}/` scaffold along. After rename, point out to the user that PRD PDFs go in `.project/<slug>/docs/prd/` (they typically have them in `~/Downloads/` and the skill can `cp` them over if the user names the files).
+### 3.4 (no rename needed — `.project/` is flat)
+The template ships with content directly under `.project/` (no `PROJECT/` subdir). Skip to 3.5. PRD PDFs go in `.project/docs/prd/` — the user typically has them in `~/Downloads/`; the skill can `cp` them over if the user names the files.
 
 ### 3.5 (Option A) Remove unused infra
 If Option A:
 - Delete `.claude/agents/{aria,bram,cleo}.md`
 - Delete `.claude/skills/{aria,bram,cleo}/`
-- Delete `.project/<slug>/kickoff/{aria,bram,cleo}.md`
-- Delete `.project/<slug>/in-flight.md`
-- Delete `.project/<slug>/handoffs/`, `coordination/`
+- Delete `.project/kickoff/{aria,bram,cleo}.md`
+- Delete `.project/in-flight.md`
+- Delete `.project/handoffs/`, `.project/coordination/`
 - Delete `.claude/agents/implementation-lead.md`, `quality-lead.md`, `delivery-lead.md`, `observability-security-teammate.md`, `codebase-mapper.md` (Option A doesn't use generic teammates either)
 
 ### 3.6 (Option B) Remove only Option-C-specific infra
 If Option B:
 - Delete `.claude/agents/{aria,bram,cleo}.md`
 - Delete `.claude/skills/{aria,bram,cleo}/`
-- Delete `.project/<slug>/kickoff/{aria,bram,cleo}.md`
-- Keep `.project/<slug>/in-flight.md`, `handoffs/`, `coordination/` (still useful for ad-hoc dispatches)
+- Delete `.project/kickoff/{aria,bram,cleo}.md`
+- Keep `.project/in-flight.md`, `.project/handoffs/`, `.project/coordination/` (still useful for ad-hoc dispatches)
 - Keep generic teammate types in `.claude/agents/`
 
 ### 3.7 (Option C / C+) Keep everything; ensure custom names applied
@@ -169,7 +171,7 @@ If Option C+:
 - Rename `.claude/agents/aria.md` → `.claude/agents/<custom_name_1>.md` (and update content's `name:` field)
 - Same for bram, cleo
 - Same for `.claude/skills/aria/` etc.
-- Same for `.project/<slug>/kickoff/aria.md` etc.
+- Same for `.project/kickoff/aria.md` etc.
 - Update gauntlet-team-lead.md's "Available teammates" section to reference custom names
 
 ### 3.8 Update CLAUDE_SESSION_HANDOFF.md
@@ -397,8 +399,8 @@ Files in git (visible to graders / collaborators / public if you make the repo p
 - scripts/setup-onedrive-mirror.sh (if user opted in)
 
 Files local-only / OneDrive-mirrored (NOT in git, never pushed):
-- .project/<slug>/ — coordination scaffold (in-flight, kickoffs, candidates, handoffs, sessions, stories)
-- .project/<slug>/docs/{prd,lesson-design,research,demo}/ — PRD source, sketches, demo materials
+- .project/ — coordination scaffold (in-flight, kickoffs, candidates, handoffs, sessions, stories)
+- .project/docs/{prd,lesson-design,research,demo}/ — PRD source, sketches, demo materials
 - .claude/agents/ (<count> personas active)
 - .claude/skills/ (<list active slash commands>)
 

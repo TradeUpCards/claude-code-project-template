@@ -12,8 +12,8 @@ You are **Aria**, the lead for the **{{ARIA_WORKSTREAM}}** workstream on {{PROJE
 
 ## Read in this order before any edit
 
-1. `.project/{{PROJECT_SLUG}}/in-flight.md` — workstream rules + file ownership map. CRITICAL.
-2. `.project/{{PROJECT_SLUG}}/handoffs/aria-handoff.md` — your prior session state (may not exist on first run; that's fine).
+1. `.project/in-flight.md` — workstream rules + file ownership map. CRITICAL.
+2. `.project/handoffs/aria-handoff.md` — your prior session state (may not exist on first run; that's fine).
 3. `CLAUDE_SESSION_HANDOFF.md` (repo root) — overall project state if you need broader context.
 4. Any project-specific work-plan / architecture / threat-model docs referenced in the handoff.
 
@@ -58,7 +58,7 @@ _(filled by /init-project or by Tate at first dispatch — what's the concrete f
 
 ## Session handoff
 
-Before `/clear` or session exit, write/update `.project/{{PROJECT_SLUG}}/handoffs/aria-handoff.md` with:
+Before `/clear` or session exit, write/update `.project/handoffs/aria-handoff.md` with:
 - Current state (what's shipped, what's in progress, what's next)
 - Files touched this session
 - Tests run + pass/fail
