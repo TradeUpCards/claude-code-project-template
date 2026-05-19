@@ -43,12 +43,26 @@
       "Bash(git log *)",
       "Bash(git fetch *)",
       "Bash(git remote *)",
+      "Bash(git ls-remote *)",
+      "Bash(git branch *)",
+      "Bash(git rm --cached *)",
+      "Bash(git mv *)",
+      "Bash(git worktree list)",
       "Bash(pytest *)",
       "Bash(python -m *)",
       "Bash(python -c *)",
       "Bash(npm test *)",
       "Bash(npm run test *)",
-      "Bash(npm run lint *)"
+      "Bash(npm run lint *)",
+      "Bash(bash scripts/setup-onedrive-mirror.sh)",
+      "Bash(bash scripts/setup-worktrees.sh)",
+      "Bash(gh auth status*)",
+      "Bash(glab auth status*)",
+      "Bash(gh --version)",
+      "Bash(glab --version)",
+      "Bash(glab repo list*)",
+      "Bash(gh repo view*)",
+      "Bash(glab repo view*)"
     ]
   }
 }

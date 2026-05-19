@@ -33,7 +33,7 @@ This directory holds **coordination artifacts that don't belong in the main repo
 
 - Code → project's source tree (e.g., `src/`)
 - Tests → `tests/`
-- Project docs → `docs/` or repo root
+- Project docs (PRD source, lesson sketches, demo plans, video scripts) → `.project/{{PROJECT_SLUG}}/docs/` (local-only / OneDrive, NOT committed). Code-level docs (README, ARCHITECTURE) stay at repo root.
 - Lead persona definitions → `.claude/agents/`
 - Slash command skills → `.claude/skills/`
 - Tate-to-Tate handoff → `CLAUDE_SESSION_HANDOFF.md` at repo root (NOT here)
